@@ -545,7 +545,7 @@ void GaleDarknessRNGSystem::generateAllSecondariesInSearchRange(const u32 postSt
 
   BaseRNGSystem::generateAllSecondariesInSearchRange(
       postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
-      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount);
+      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
 }
 
 std::array<BaseRNGSystem::StatsRange, 6>

@@ -22,7 +22,7 @@ SeedFinderWizard::SeedFinderWizard(QWidget* parent, const GUICommon::gameSelecti
   setPage(pageID::Start, new StartPage(this, game));
   setPage(pageID::Instructions, new InstructionsPage(this, game));
   setPage(pageID::SeedFinderPass, getSeedFinderPassPageForGame());
-  setStartId(pageID::Start);
+  setStartId(pageID::SeedFinderPass);
 
   setOptions(QWizard::HaveCustomButton1);
   setButtonText(QWizard::CustomButton1, "&Next Pass >");

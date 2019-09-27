@@ -73,7 +73,7 @@ void MainWindow::initialiseWidgets()
   m_btnReset->setEnabled(false);
 
   m_chkFilterUnwantedPredictions = new QCheckBox(tr("Hide unwanted predictions"));
-  m_chkFilterUnwantedPredictions->setChecked(false);
+  m_chkFilterUnwantedPredictions->setChecked(true);
   connect(m_chkFilterUnwantedPredictions, &QCheckBox::stateChanged, this,
           [=](int state) { m_predictorWidget->filterUnwanted(state == Qt::Checked); });
 
@@ -291,7 +291,8 @@ void MainWindow::startSeedFinder()
     setCurrentSeed(wizard->getSeeds()[0], 0);
     m_seedSet = true;
   }
-
+  storeSeed();
+  m_chkFilterUnwantedPredictions->setChecked(true);
   delete wizard;
 }
 
