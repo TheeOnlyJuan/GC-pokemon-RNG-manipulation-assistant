@@ -33,7 +33,8 @@ private:
   void makeMenus();
 
   void gameChanged();
-  void startSeedFinder();
+  void startSeedFinder(bool secondSeed = false);
+  void findSecondSeed();
   void resetPredictor();
   void storeSeed();
   void restoreSeed();
@@ -61,6 +62,7 @@ private:
   QLineEdit* m_edtManualSeed;
   QPushButton* m_btnSetSeedManually;
   QPushButton* m_btnSetSecondarySeedManually;
+  QPushButton* m_btnFindSecondSeed;
   QLabel* m_lblCurrentSeed;
   QLabel* m_lblStoredSeed;
   QPushButton* m_btnStoreSeed;
