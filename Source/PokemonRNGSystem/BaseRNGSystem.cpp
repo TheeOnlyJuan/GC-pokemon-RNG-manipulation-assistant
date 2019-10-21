@@ -261,7 +261,7 @@ void BaseRNGSystem::generateAllSecondariesInSearchRange(const u32 postStarterSee
   }
 }
 
-std::vector<BaseRNGSystem::SecondaryCandidate>
+    std::vector<BaseRNGSystem::SecondaryCandidate>
 BaseRNGSystem::getFilteredSecondaryCandidates(const int hp, const int atk, const int def,
                                               const int spAtk, const int spDef, const int speed,
                                               const int genderIndex)

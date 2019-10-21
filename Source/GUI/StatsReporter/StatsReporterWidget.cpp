@@ -184,11 +184,24 @@ void StatsReporterWidget::onSecondaryChanged(const int newIndex)
   m_secondaryFrame->setPokemonIcon(pixmapForPokemon(m_cmbSecondaryPokemon->currentText()));
 
   updateStatsSelection();
-
-  SPokemonRNG::getCurrentSystem()->generateAllSecondariesInSearchRange(
-      m_startingSeed, m_cmbSecondaryPokemon->currentIndex());
+  if (!customSeed)
+  {
+    SPokemonRNG::getCurrentSystem()->generateAllSecondariesInSearchRange(
+        m_startingSeed, m_cmbSecondaryPokemon->currentIndex());
+  }
+  else
+  {
+    SPokemonRNG::getCurrentSystem()->customGenerateAllSecondariesInSearchRange(
+        m_startingSeed, m_cmbSecondaryPokemon->currentIndex());
+  }
+  
 }
-
+void StatsReporterWidget::setCustomStartingSeed(u32 newSeed)
+{
+  m_startingSeed = newSeed;
+  customSeed = true;
+  onSecondaryChanged(0);
+}
 void StatsReporterWidget::updateStatsSelection()
 {
   std::array<BaseRNGSystem::StatsRange, 6> statsRange =
@@ -372,4 +385,5 @@ void StatsReporterWidget::reset()
     frame->reset();
 
   m_secondaryFrame->reset();
+  customSeed = false;
 }

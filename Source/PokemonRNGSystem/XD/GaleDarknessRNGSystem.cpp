@@ -547,7 +547,16 @@ void GaleDarknessRNGSystem::generateAllSecondariesInSearchRange(const u32 postSt
       postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
       secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
 }
+void GaleDarknessRNGSystem::customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
+                                                                const int secondaryIndex)
+{
+  if (secondaryIndex != teddiursaSecondaryIndex)
+    return;
 
+  BaseRNGSystem::generateAllSecondariesInSearchRange(
+      postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
+      473000, 7000, 473000);
+}
 std::array<BaseRNGSystem::StatsRange, 6>
 GaleDarknessRNGSystem::getSecondaryStatsRange(const int secondaryIndex)
 {

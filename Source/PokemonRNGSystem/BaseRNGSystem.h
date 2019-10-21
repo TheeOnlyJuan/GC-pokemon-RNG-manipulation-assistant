@@ -89,6 +89,8 @@ public:
   // Internally generates all the secondary Pokémons in the searh range
   virtual void generateAllSecondariesInSearchRange(const u32 postStarterSeed,
                                                    const int secondaryIndex) = 0;
+  virtual void customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
+                                                         const int secondaryIndex) = 0;
   // Obtain the possible stats range of the given secondary, order: HP, Atk, Def, SpA, SpD, Spe
   virtual std::array<StatsRange, 6> getSecondaryStatsRange(const int secondaryIndex) = 0;
   std::vector<SecondaryCandidate> getFilteredSecondaryCandidates(const int hp, const int atk,

@@ -476,7 +476,16 @@ void ColosseumRNGSystem::generateAllSecondariesInSearchRange(const u32 postStart
       postStarterSeed, secondaryBaseStats[secondaryIndex], secondaryLevel, secondaryGenderRatio,
       secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
 }
+void ColosseumRNGSystem::customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
+                                                             const int secondaryIndex)
+{
+  if (!(secondaryIndex < POKEMON_COUNT || secondaryIndex >= quilava))
+    return;
 
+  BaseRNGSystem::generateAllSecondariesInSearchRange(
+      postStarterSeed, secondaryBaseStats[secondaryIndex], secondaryLevel, secondaryGenderRatio,
+      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
+}
 std::array<BaseRNGSystem::StatsRange, 6>
 ColosseumRNGSystem::getSecondaryStatsRange(const int secondaryIndex)
 {

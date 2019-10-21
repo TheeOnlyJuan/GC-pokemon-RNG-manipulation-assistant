@@ -18,6 +18,7 @@ public:
   void gameChanged(const GUICommon::gameSelection game);
   void startersPredictionChanged(const BaseRNGSystem::StartersPrediction starters);
   void reset();
+  void setCustomStartingSeed(u32 newSeed);
 
 private:
   void onSecondaryChanged(const int newIndex);
@@ -31,7 +32,7 @@ private:
   const int c_maxResultsShown = 100;
 
   u32 m_startingSeed = 0;
-
+  bool customSeed = false;
   QComboBox* m_cmbSecondaryPokemon;
 
   QComboBox* m_cmbGender;

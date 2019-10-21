@@ -53,6 +53,8 @@ private:
   StartersPrediction generateStarterPokemons(u32 seed) final override;
   void generateAllSecondariesInSearchRange(const u32 postStarterSeed,
                                            const int secondaryIndex) final override;
+  void customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
+                                           const int secondaryIndex) final override;
   std::array<StatsRange, 6> getSecondaryStatsRange(const int secondaryIndex) final override;
   u32 generatePokemonPID(u32& seed, const u32 hTrainerId, const u32 lTrainerId, const u32 dummyId,
                          u16* counter = nullptr, const s8 wantedGender = -1,
