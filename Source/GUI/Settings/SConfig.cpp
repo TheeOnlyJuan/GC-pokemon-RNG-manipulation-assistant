@@ -184,6 +184,26 @@ bool SConfig::getXDPalVersionEnabled() const
   return m_settings->value("galeDarknessPredictor/PALVersionEnabled", false).toBool();
 }
 
+int SConfig::getXDTeddyStartingFrame() const
+{
+  return m_settings->value("galeDarknessPredictor/TeddyStartingFrame", 680000).toInt();
+}
+
+int SConfig::getXDTeddySearchFrames() const
+{
+  return m_settings->value("galeDarknessPredictor/TeddySearchFrames", 63000).toInt();
+}
+
+int SConfig::getXDTeddyNewGameStartingFrame() const
+{
+  return m_settings->value("galeDarknessPredictor/TeddyNewGameStartingFrame", 473000).toInt();
+}
+
+int SConfig::getXDTeddyNewGameSearchFrames() const
+{
+  return m_settings->value("galeDarknessPredictor/TeddyNewGameSearchFrames", 7000).toInt();
+}
+
 void SConfig::setThreadLimit(const int threadLimit)
 {
   m_settings->setValue("generalSettings/CPUThreadLimit", threadLimit);
@@ -327,4 +347,24 @@ void SConfig::setEeveeGender(const GUICommon::gender gender) const
 void SConfig::setXDPalVersionEnabled(const bool xdPalVersionEnabled) const
 {
   m_settings->setValue("galeDarknessPredictor/PALVersionEnabled", xdPalVersionEnabled);
+}
+
+void SConfig::setXDTeddyStartingFrame(const int frame)
+{
+  m_settings->setValue("galeDarknessPredictor/TeddyStartingFrame", frame);
+}
+
+void SConfig::setXDTeddySearchFrames(const int framesToSearch)
+{
+  m_settings->setValue("galeDarknessPredictor/TeddySearchFrames", framesToSearch);
+}
+
+void SConfig::setXDTeddyNewGameStartingFrame(const int frame)
+{
+  m_settings->setValue("galeDarknessPredictor/TeddyNewGameStartingFrame", frame);
+}
+
+void SConfig::setXDTeddyNewGameSearchFrames(const int framesToSearch)
+{
+  m_settings->setValue("galeDarknessPredictor/TeddyNewGameSearchFrames", framesToSearch);
 }

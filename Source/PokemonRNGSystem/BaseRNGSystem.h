@@ -7,6 +7,9 @@
 #include <functional>
 #include <vector>
 
+#include "Settings/DlgSettings.h"
+#include "Settings/SConfig.h"
+
 // This class manages all the backend and the implementation details of the RNG of a GameCube
 // Pokemon game, it consists of a seed finder with precalculation to improve performances and a stat
 // predictor based on the frame of confirming a name on the naming screen

@@ -63,11 +63,47 @@ GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
   m_spbMaxAutoReroll->setValue(100);
   m_spbMaxAutoReroll->setMaximumWidth(150);
 
+    QLabel* lblStartingTeddyFrame =
+      new QLabel(tr("From Eevee seed Teddy search. Frame to start at: "));
+  m_spbTeddyStartingFrame = new QSpinBox();
+  m_spbTeddyStartingFrame->setMinimum(1);
+  m_spbTeddyStartingFrame->setMaximum(1000000);
+  m_spbTeddyStartingFrame->setValue(680000);
+  m_spbTeddyStartingFrame->setMaximumWidth(150);
+
+      QLabel* lblTeddySearchWindow =
+      new QLabel(tr("From Eevee seed Teddy search. Number of frames to check: "));
+  m_spbTeddySearchFrames = new QSpinBox();
+  m_spbTeddySearchFrames->setMinimum(1);
+  m_spbTeddySearchFrames->setMaximum(500000);
+  m_spbTeddySearchFrames->setValue(63000);
+  m_spbTeddySearchFrames->setMaximumWidth(150);
+
+        QLabel* lblTeddyNewGameStartFrame =
+      new QLabel(tr("New Game Teddy search. Frame to start at: "));
+  m_spbTeddyNewGameStartingFrame = new QSpinBox();
+  m_spbTeddyNewGameStartingFrame->setMinimum(1);
+  m_spbTeddyNewGameStartingFrame->setMaximum(1000000);
+  m_spbTeddyNewGameStartingFrame->setValue(473000);
+  m_spbTeddyNewGameStartingFrame->setMaximumWidth(150);
+
+        QLabel* lblTeddyNewGameSearchWindow =
+      new QLabel(tr("New Game Teddy search. Number of frames to check: "));
+  m_spbTeddyNewGameSearchFrames = new QSpinBox();
+  m_spbTeddyNewGameSearchFrames->setMinimum(1);
+  m_spbTeddyNewGameSearchFrames->setMaximum(500000);
+  m_spbTeddyNewGameSearchFrames->setValue(7000);
+  m_spbTeddyNewGameSearchFrames->setMaximumWidth(150);
+
   QFormLayout* predictionTimeLayout = new QFormLayout;
   predictionTimeLayout->setLabelAlignment(Qt::AlignRight);
   predictionTimeLayout->addRow(lblPredictionsTime, m_spbPredictionsTime);
   predictionTimeLayout->addRow(lblFrameOffset, m_spbFrameOffset);
   predictionTimeLayout->addRow(lblMaxAutoReroll, m_spbMaxAutoReroll);
+  predictionTimeLayout->addRow(lblStartingTeddyFrame, m_spbTeddyStartingFrame);
+  predictionTimeLayout->addRow(lblTeddySearchWindow, m_spbTeddySearchFrames);
+  predictionTimeLayout->addRow(lblTeddyNewGameStartFrame, m_spbTeddyNewGameStartingFrame);
+  predictionTimeLayout->addRow(lblTeddyNewGameSearchWindow, m_spbTeddyNewGameSearchFrames);
 
   QGroupBox* gbPredictor = new QGroupBox(tr("Starters predictor"));
   gbPredictor->setLayout(predictionTimeLayout);
@@ -133,4 +169,38 @@ void GeneralTab::setMaxAutoReroll(const int maxAutoReroll)
 void GeneralTab::setRestorePreviousWindowGeometry(const bool restoreGeometry)
 {
   m_chkRestorePreviousWindowGeometry->setChecked(restoreGeometry);
+}
+
+void GeneralTab::setTeddyStartingFrame(const int frame)
+{
+ m_spbTeddyStartingFrame->setValue(frame);
+}
+void GeneralTab::setTeddySearchFrames(const int frames)
+{
+  m_spbTeddySearchFrames->setValue(frames);
+}
+void GeneralTab::setTeddyNewGameStartingFrame(const int frame)
+{
+  m_spbTeddyNewGameStartingFrame->setValue(frame);
+}
+void GeneralTab::setTeddyNewGameSearchFrames(const int frames)
+{
+  m_spbTeddyNewGameSearchFrames->setValue(frames);
+}
+
+int GeneralTab::getTeddyStartingFrame()
+{
+  return m_spbTeddyStartingFrame->value();
+}
+int GeneralTab::getTeddySearchFrames()
+{
+  return m_spbTeddySearchFrames->value();
+}
+int GeneralTab::getTeddyNewGameStartingFrame()
+{
+  return m_spbTeddyNewGameStartingFrame->value();
+}
+int GeneralTab::getTeddyNewGameSearchFrames()
+{
+  return m_spbTeddyNewGameSearchFrames->value();
 }

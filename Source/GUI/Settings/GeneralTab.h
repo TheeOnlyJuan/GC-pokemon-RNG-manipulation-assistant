@@ -18,6 +18,15 @@ public:
   int getFrameOffset() const;
   int getMaxAutoReroll() const;
   bool getRestorePreviousWindowGeometry() const;
+  int getTeddyStartingFrame();
+  int getTeddySearchFrames();
+  int getTeddyNewGameStartingFrame();
+  int getTeddyNewGameSearchFrames();
+
+  void setTeddyStartingFrame(const int frame);
+  void setTeddySearchFrames(const int frames);
+  void setTeddyNewGameStartingFrame(const int frame);
+  void setTeddyNewGameSearchFrames(const int frame);
 
   void setThreadLimit(const int threadLimit);
   void setPredictionTime(const int predictionTime);
@@ -30,5 +39,9 @@ private:
   QSpinBox* m_spbPredictionsTime;
   QSpinBox* m_spbFrameOffset;
   QSpinBox* m_spbMaxAutoReroll;
+  QSpinBox* m_spbTeddyStartingFrame;
+  QSpinBox* m_spbTeddySearchFrames;
+  QSpinBox* m_spbTeddyNewGameStartingFrame;
+  QSpinBox* m_spbTeddyNewGameSearchFrames;
   QCheckBox* m_chkRestorePreviousWindowGeometry;
 };

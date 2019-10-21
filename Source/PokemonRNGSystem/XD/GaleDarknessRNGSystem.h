@@ -57,7 +57,7 @@ private:
   void generateAllSecondariesInSearchRange(const u32 postStarterSeed,
                                            const int secondaryIndex) final override;
   void customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
-                                           const int secondaryIndex) final override;
+                                                 const int secondaryIndex) final override;
   std::array<StatsRange, 6> getSecondaryStatsRange(const int secondaryIndex) final override;
   u32 generatePokemonPID(u32& seed, const u32 hTrainerId, const u32 lTrainerId, const u32 dummyId,
                          u16* counter = nullptr,
@@ -67,8 +67,11 @@ private:
   std::array<u8, 6> generateEVs(u32& seed, const bool allowUnfilledEV, const bool endPrematurely,
                                 u16* counter = nullptr);
 
-  const int secondaryRngAdvanceSearchStart = 680000;
-  const int secondarySearchSeedsAmount = 63000;
+  const int secondaryRngAdvanceSearchStart =
+      SConfig::getInstance().getXDTeddyStartingFrame();                                   // 680000;
+  const int secondarySearchSeedsAmount = SConfig::getInstance().getXDTeddySearchFrames(); // 63000;
+  const int newGameRNGAdvance = SConfig::getInstance().getXDTeddyNewGameStartingFrame();
+  const int newGameSearchSeedAmount = SConfig::getInstance().getXDTeddyNewGameSearchFrames();
   const int teddiursaLevel = 11;
   const u8 teddiursaGenderRatio = 127;
 

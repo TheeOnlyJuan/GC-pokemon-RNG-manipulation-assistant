@@ -59,6 +59,15 @@ public:
   void setEeveeShininess(const GUICommon::shininess shininess) const;
   void setEeveeGender(const GUICommon::gender gender) const;
   void setXDPalVersionEnabled(const bool xdPalVersionEnabled) const;
+  void setXDTeddyStartingFrame(const int frame);
+  void setXDTeddySearchFrames(const int frameToSearch);
+  void setXDTeddyNewGameStartingFrame(const int frame);
+  void setXDTeddyNewGameSearchFrames(const int framesToSearch);
+
+  int getXDTeddyStartingFrame() const;
+  int getXDTeddySearchFrames() const;
+  int getXDTeddyNewGameStartingFrame() const;
+  int getXDTeddyNewGameSearchFrames() const;
 
 private:
   SConfig();

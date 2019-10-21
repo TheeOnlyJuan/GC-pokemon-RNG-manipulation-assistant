@@ -545,7 +545,9 @@ void GaleDarknessRNGSystem::generateAllSecondariesInSearchRange(const u32 postSt
 
   BaseRNGSystem::generateAllSecondariesInSearchRange(
       postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
-      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
+      SConfig::getInstance().getXDTeddyStartingFrame(),
+      SConfig::getInstance().getXDTeddySearchFrames(),
+      SConfig::getInstance().getXDTeddyStartingFrame());
 }
 void GaleDarknessRNGSystem::customGenerateAllSecondariesInSearchRange(const u32 postStarterSeed,
                                                                 const int secondaryIndex)
@@ -553,9 +555,10 @@ void GaleDarknessRNGSystem::customGenerateAllSecondariesInSearchRange(const u32 
   if (secondaryIndex != teddiursaSecondaryIndex)
     return;
 
-  BaseRNGSystem::generateAllSecondariesInSearchRange(
-      postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
-      473000, 7000, 473000);
+  BaseRNGSystem::generateAllSecondariesInSearchRange(postStarterSeed, teddiursaBaseStats, teddiursaLevel, teddiursaGenderRatio,
+      SConfig::getInstance().getXDTeddyNewGameStartingFrame(),
+      SConfig::getInstance().getXDTeddyNewGameSearchFrames(),
+      SConfig::getInstance().getXDTeddyNewGameStartingFrame());
 }
 std::array<BaseRNGSystem::StatsRange, 6>
 GaleDarknessRNGSystem::getSecondaryStatsRange(const int secondaryIndex)

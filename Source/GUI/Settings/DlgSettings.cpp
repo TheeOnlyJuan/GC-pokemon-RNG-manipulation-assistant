@@ -58,6 +58,10 @@ void DlgSettings::loadSettings()
   m_generalTab->setMaxAutoReroll(SConfig::getInstance().getMaxAutoReroll());
   m_generalTab->setRestorePreviousWindowGeometry(
       SConfig::getInstance().getRestorePreviousWindowGeometry());
+  m_generalTab->setTeddyStartingFrame(SConfig::getInstance().getXDTeddyStartingFrame());
+  m_generalTab->setTeddySearchFrames(SConfig::getInstance().getXDTeddySearchFrames());
+  m_generalTab->setTeddyNewGameStartingFrame(SConfig::getInstance().getXDTeddyNewGameStartingFrame());
+  m_generalTab->setTeddyNewGameSearchFrames(SConfig::getInstance().getXDTeddyNewGameSearchFrames());
 
   loadUmbreonSettings();
   loadEspeonSettings();
@@ -77,6 +81,11 @@ void DlgSettings::saveSettings() const
   saveUmbreonSettings();
   saveEspeonSettings();
   saveEeveeSettings();
+  SConfig::getInstance().setXDTeddyStartingFrame(m_generalTab->getTeddyStartingFrame());
+  SConfig::getInstance().setXDTeddySearchFrames(m_generalTab->getTeddySearchFrames());
+  SConfig::getInstance().setXDTeddyNewGameStartingFrame(
+      m_generalTab->getTeddyNewGameStartingFrame());
+  SConfig::getInstance().setXDTeddyNewGameSearchFrames(m_generalTab->getTeddyNewGameSearchFrames());
   SConfig::getInstance().setXDPalVersionEnabled(m_xdTab->getPalVersionEnabled());
   GaleDarknessRNGSystem::setPalEnabled(m_xdTab->getPalVersionEnabled());
 }
