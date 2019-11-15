@@ -46,7 +46,7 @@ SeedFinderWizard::SeedFinderWizard(QWidget* parent, const GUICommon::gameSelecti
   setWizardStyle(QWizard::ModernStyle);
 
   QList<QWizard::WizardButton> btnlayout;
-  btnlayout << QWizard::Stretch << QWizard::CancelButton << QWizard::CustomButton1;
+  btnlayout << QWizard::Stretch << QWizard::CancelButton << QWizard::NextButton;
   setButtonLayout(btnlayout);
   setFixedWidth(650);
 }
