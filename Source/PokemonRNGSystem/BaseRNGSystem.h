@@ -44,7 +44,6 @@ public:
     PokemonProperties properties;
     Stats stats;
     u32 startingSeed = 0;
-    int frameNumber = 0;
   };
 
   struct StartersPrediction
@@ -112,8 +111,7 @@ protected:
   void generateAllSecondariesInSearchRange(const u32 postStarterSeed, const Stats baseStats,
                                            const int level, const u8 genderRatio,
                                            const int rngAdvanceSearchStart,
-                                           const int searchSeedsAmount,
-                                           const int advancedSearchStart);
+                                           const int searchSeedsAmount);
 
   // The LCG used in both Pokemon games
   u32 inline LCG(u32& seed, u16* counter = nullptr)
@@ -186,7 +184,7 @@ protected:
 
 private:
   SecondaryCandidate generateSecondary(u32 seed, const Stats baseStats, const int level,
-                                       const u8 genderRatio, int frameNumber);
+                                       const u8 genderRatio);
 
   std::vector<SecondaryCandidate> m_secondaryCandidates;
 };

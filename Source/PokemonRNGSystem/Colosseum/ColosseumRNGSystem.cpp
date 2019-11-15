@@ -474,7 +474,7 @@ void ColosseumRNGSystem::generateAllSecondariesInSearchRange(const u32 postStart
 
   BaseRNGSystem::generateAllSecondariesInSearchRange(
       postStarterSeed, secondaryBaseStats[secondaryIndex], secondaryLevel, secondaryGenderRatio,
-      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount, secondaryRngAdvanceSearchStart);
+      secondaryRngAdvanceSearchStart, secondarySearchSeedsAmount);
 }
 
 std::array<BaseRNGSystem::StatsRange, 6>
