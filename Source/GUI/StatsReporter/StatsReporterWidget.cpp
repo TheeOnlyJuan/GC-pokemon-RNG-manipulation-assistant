@@ -55,7 +55,7 @@ StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
   m_tblSecondaryPossibilities->setColumnCount(m_possibilitiesHeaderLabels.size());
   m_tblSecondaryPossibilities->setRowCount(0);
   m_tblSecondaryPossibilities->setHorizontalHeaderLabels(m_possibilitiesHeaderLabels);
-  m_tblSecondaryPossibilities->setMinimumHeight(100);
+  m_tblSecondaryPossibilities->setMinimumHeight(200);
   m_tblSecondaryPossibilities->resizeColumnsToContents();
   connect(m_tblSecondaryPossibilities, &QTableWidget::itemSelectionChanged, this,
           &StatsReporterWidget::selectedPossibilityChanged);
@@ -83,7 +83,7 @@ StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(lblTitle);
   mainLayout->addLayout(secondaryPokemonLayout);
- // mainLayout->addSpacing(20);
+  mainLayout->addSpacing(20);
   mainLayout->addWidget(lblStats);
   mainLayout->addLayout(statsLayout);
   mainLayout->addWidget(m_tblSecondaryPossibilities);
@@ -111,7 +111,6 @@ StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
           &StatsReporterWidget::onStatsGenderChanged);
 
   setFixedWidth(400);
-  setFixedHeight(614);
 }
 
 void StatsReporterWidget::gameChanged(const GUICommon::gameSelection game)
