@@ -32,7 +32,7 @@ MainWindow::MainWindow()
   connect(this, &MainWindow::onPrecalcDone, this, &MainWindow::precalcDone);
   connect(this, &MainWindow::onUpdatePrecalcProgress, this, [=](long value) {
     if (value == m_dlgProgressPrecalc->maximum())
-      m_dlgProgressPrecalc->setLabelText(tr("Writting to disk..."));
+      m_dlgProgressPrecalc->setLabelText(tr("ディスクへの書き込み..."));
     else
       m_dlgProgressPrecalc->setValue(value);
   });
@@ -56,50 +56,50 @@ void MainWindow::initialiseWidgets()
 {
   m_cmbGame = new QComboBox;
   m_cmbGame->addItems(GUICommon::gamesStr);
-  m_cmbGame->addItem(tr("--Select your game--"));
+  m_cmbGame->addItem(tr("--ゲームを選ぶ--"));
   m_cmbGame->setCurrentIndex(static_cast<int>(GUICommon::gameSelection::Unselected));
   connect(m_cmbGame, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
           &MainWindow::gameChanged);
 
-  m_btnSettings = new QPushButton(tr("&Settings"));
+  m_btnSettings = new QPushButton(tr("&設定"));
   connect(m_btnSettings, &QPushButton::clicked, this, &MainWindow::openSettings);
 
-  m_btnStartSeedFinder = new QPushButton(tr("&Find your seed"));
+  m_btnStartSeedFinder = new QPushButton(tr("&Seedを見つける"));
   connect(m_btnStartSeedFinder, &QPushButton::clicked, this, &MainWindow::startSeedFinder);
   m_btnStartSeedFinder->setEnabled(false);
 
-  m_btnReset = new QPushButton(tr("&Reset"));
+  m_btnReset = new QPushButton(tr("&リセット"));
   connect(m_btnReset, &QPushButton::clicked, this, &MainWindow::resetPredictor);
   m_btnReset->setEnabled(false);
 
-  m_chkFilterUnwantedPredictions = new QCheckBox(tr("Hide unwanted predictions"));
+  m_chkFilterUnwantedPredictions = new QCheckBox(tr("希望する予測のみ表示"));
   m_chkFilterUnwantedPredictions->setChecked(false);
   connect(m_chkFilterUnwantedPredictions, &QCheckBox::stateChanged, this,
           [=](int state) { m_predictorWidget->filterUnwanted(state == Qt::Checked); });
 
   m_edtManualSeed = new QLineEdit();
   m_edtManualSeed->setEnabled(false);
-  m_btnSetSeedManually = new QPushButton("Set See&d");
+  m_btnSetSeedManually = new QPushButton("入力");
   connect(m_btnSetSeedManually, &QPushButton::clicked, this, &MainWindow::setSeedManually);
   m_btnSetSeedManually->setEnabled(false);
 
   m_lblCurrentSeed = new QLabel("  ????  ");
-  m_lblStoredSeed = new QLabel("  None  ");
+  m_lblStoredSeed = new QLabel("  なし  ");
 
-  m_btnStoreSeed = new QPushButton("St&ore Seed");
+  m_btnStoreSeed = new QPushButton("現在のSeed値を保存する");
   connect(m_btnStoreSeed, &QPushButton::clicked, this, &MainWindow::storeSeed);
   m_btnStoreSeed->setEnabled(false);
 
-  m_btnRestoreSeed = new QPushButton("Res&tore Seed");
+  m_btnRestoreSeed = new QPushButton("保存したSeed値をロードする");
   connect(m_btnRestoreSeed, &QPushButton::clicked, this, &MainWindow::restoreSeed);
   m_btnRestoreSeed->setEnabled(false);
 
-  m_btnRerollPrediciton = new QPushButton(tr("R&eroll\n(requires an additional team generation)"));
+  m_btnRerollPrediciton = new QPushButton(tr("リロール\n（リロール1回につきチーム生成を1回行ってください）"));
   connect(m_btnRerollPrediciton, &QPushButton::clicked, this, &MainWindow::singleRerollPredictor);
   m_btnRerollPrediciton->setEnabled(false);
 
   m_btnAutoRerollPrediciton =
-      new QPushButton(tr("&Auto Reroll\n(rerolls until the next desired prediction)"));
+      new QPushButton(tr("自動リロール\n（望ましいSeedが検索されるまでリロールします）"));
   connect(m_btnAutoRerollPrediciton, &QPushButton::clicked, this, &MainWindow::autoRerollPredictor);
   m_btnAutoRerollPrediciton->setEnabled(false);
 
@@ -123,7 +123,7 @@ void MainWindow::makeLayouts()
   buttonsLayout->addWidget(m_btnReset);
 
   QHBoxLayout* setSeedLayout = new QHBoxLayout;
-  setSeedLayout->addWidget(new QLabel("Set the seed manually:"));
+  setSeedLayout->addWidget(new QLabel("手動でSeed値を入力する:"));
   setSeedLayout->addWidget(m_edtManualSeed);
   setSeedLayout->addWidget(m_btnSetSeedManually);
 
@@ -132,7 +132,7 @@ void MainWindow::makeLayouts()
   filterUnwantedLayout->addWidget(m_chkFilterUnwantedPredictions);
   filterUnwantedLayout->addStretch();
 
-  QLabel* lblReroll = new QLabel(tr("Reroll count: "), this);
+  QLabel* lblReroll = new QLabel(tr("リロール数: "), this);
 
   QHBoxLayout* rerollCountLayout = new QHBoxLayout;
   rerollCountLayout->addStretch();
@@ -142,10 +142,10 @@ void MainWindow::makeLayouts()
 
   QHBoxLayout* seedInfoLayout = new QHBoxLayout;
   seedInfoLayout->addStretch();
-  seedInfoLayout->addWidget(new QLabel("Stored Seed:"));
+  seedInfoLayout->addWidget(new QLabel("保存したSeed値:"));
   seedInfoLayout->addWidget(m_lblStoredSeed);
   seedInfoLayout->addSpacing(20);
-  seedInfoLayout->addWidget(new QLabel("Current Seed:"));
+  seedInfoLayout->addWidget(new QLabel("現在のSeed値:"));
   seedInfoLayout->addWidget(m_lblCurrentSeed);
   seedInfoLayout->addStretch();
 
@@ -180,26 +180,26 @@ void MainWindow::makeLayouts()
   mainWidget->setLayout(mainLayout);
   setCentralWidget(mainWidget);
 
-  setWindowTitle("GameCube Pokémon RNG assistant");
+  setWindowTitle("ポケモン乱数調整ツール");
 }
 
 void MainWindow::makeMenus()
 {
-  m_menuFile = menuBar()->addMenu(tr("&File"));
+  m_menuFile = menuBar()->addMenu(tr("&ファイル"));
   m_actGenerationPrecalcFile =
-      m_menuFile->addAction(tr("Generate the precalculation file for the chosen game"), this,
+      m_menuFile->addAction(tr("選択したゲームの事前計算を生成する"), this,
                             [=]() { generatePrecalc(); });
   m_actGenerationPrecalcFile->setEnabled(false);
-  m_menuFile->addAction(tr("&Quit"), this, [=]() { close(); });
+  m_menuFile->addAction(tr("&終了"), this, [=]() { close(); });
 
-  m_menuEdit = menuBar()->addMenu(tr("&Edit"));
-  m_menuEdit->addAction(tr("&Settings"), this, [=]() { openSettings(); });
+  m_menuEdit = menuBar()->addMenu(tr("&編集"));
+  m_menuEdit->addAction(tr("&設定"), this, [=]() { openSettings(); });
 
-  m_menuHelp = menuBar()->addMenu(tr("&Help"));
-  m_menuHelp->addAction(tr("&About"), this, [=]() {
+  m_menuHelp = menuBar()->addMenu(tr("&ヘルプ"));
+  m_menuHelp->addAction(tr("&インフォ"), this, [=]() {
     QString title = tr("About GameCube Pokémon RNG assistant");
     QString text =
-        "Version 1.0.2\n\n" +
+        "Version 1.0.2J\n\n" +
         tr("A program to allow the manipulation of the starters RNG in Pokémon Colosseum and "
            "Pokémon XD: Gale of darkness.\n\nThis program is licensed under the MIT license. "
            "You should have received a copy of the MIT license along with this program");
@@ -237,7 +237,7 @@ void MainWindow::gameChanged()
   m_btnSetSeedManually->setEnabled(true);
   m_lblCurrentSeed->setText("  ????  ");
   m_seedSet = false;
-  m_lblStoredSeed->setText("  None  ");
+  m_lblStoredSeed->setText("  なし  ");
 
   m_statsReporterWidget->gameChanged(selection);
   m_statsReporterWidget->setDisabled(true);
@@ -271,12 +271,12 @@ void MainWindow::startSeedFinder()
   if (!(info.exists() && info.isFile()))
   {
     QMessageBox* msg = new QMessageBox(
-        QMessageBox::Critical, "Precalculation file missing",
-        "The precalculation file " + info.fileName() +
-            " specific to this game is missing from the program's directory and it is required for "
-            "the seed finding procedure. Please either download it (it should have been "
-            "distributed along the release of the program), or generate it from the File menu. It "
-            "is highly recommended to download it as the generation takes a few hours.",
+        QMessageBox::Critical, "事前計算ファイルが見つかりません",
+        "Seed値検索に必要な事前計算ファイル「" + info.fileName() +
+            "」（ポケモンコロシアム専用のファイル）が本プログラムのディレクトリ内に見つかりませんでした。"
+			"お手数ですが、当ファイルをダウンロード（本プログラムがリリースされている場所に配置されています）するか、"
+			"ファイルメニューから生成を行うかしてください。"
+			"ただし、当ファイルの生成には数時間を要するので、ダウンロードすることをお勧めします。",
         QMessageBox::Ok);
     msg->exec();
     delete msg;
@@ -309,7 +309,7 @@ void MainWindow::resetPredictor()
   m_btnRestoreSeed->setEnabled(false);
   m_lblCurrentSeed->setText("  ????  ");
   m_seedSet = false;
-  m_lblStoredSeed->setText("  None  ");
+  m_lblStoredSeed->setText("  なし  ");
   m_statsReporterWidget->reset();
   m_statsReporterWidget->setDisabled(true);
 }
@@ -342,9 +342,8 @@ void MainWindow::setSeedManually()
   }
   else
   {
-    QMessageBox* msg = new QMessageBox(QMessageBox::Critical, "Invalid seed",
-                                       "The seed you have entered is not a valid seed. Pleaser "
-                                       "enter a valid 32 bit hexadecimal number.",
+    QMessageBox* msg = new QMessageBox(QMessageBox::Critical, "無効seed",
+                                       "３２ビット１６進法 数のみが許可されています。",
                                        QMessageBox::Ok);
     msg->exec();
     delete msg;
@@ -388,9 +387,9 @@ void MainWindow::autoRerollPredictor()
 {
   QDialog* autoRerollDlg = new QDialog;
   autoRerollDlg->setModal(true);
-  autoRerollDlg->setWindowTitle("Auto rerolling");
+  autoRerollDlg->setWindowTitle("自動リロール");
   QLabel* lblAutoRerolling = new QLabel(autoRerollDlg);
-  lblAutoRerolling->setText("Auto rerolling, please wait a moment...");
+  lblAutoRerolling->setText("自動リロールしています。少々お待ち下さい...");
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(lblAutoRerolling);
   autoRerollDlg->setLayout(mainLayout);
@@ -417,11 +416,10 @@ void MainWindow::autoRerollPredictor()
     QString lastBattleConfirmationStr =
         QString::fromStdString(SPokemonRNG::getCurrentSystem()->getLastObtainedCriteriasString());
     QMessageBox* msg =
-        new QMessageBox(QMessageBox::Information, "Desired prediction found",
-                        "After " + QString::number(nbrRerolls + 1) +
-                            " rerolls, a desired prediction has been found; the predictions list "
-                            "will be updated.\n\nOn the last battle confirmation screen, the "
-                            "following information should be displayed:\n" +
+        new QMessageBox(QMessageBox::Information, "望ましいseedが見つかりました",
+                        "" + QString::number(nbrRerolls + 1) +
+                            "回のリロールで希望のseed値が見つかります。表が更新されます\n\n"
+                            "最後のチーム編成は、以下のように表示されます:\n" +
                             lastBattleConfirmationStr,
                         QMessageBox::Ok);
     msg->exec();
@@ -430,10 +428,10 @@ void MainWindow::autoRerollPredictor()
   else
   {
     QMessageBox* msg = new QMessageBox(
-        QMessageBox::Critical, "No desired prediction has been found",
-        "The predictor has reached the limit of " + QString::number(nbrRerolls) +
-            " rerolls, but no desired prediction has been found; the predictions list will be "
-            "updated. You may try to auto reroll again.",
+        QMessageBox::Critical, "望ましいseedが見つかりません",
+        QString::number(nbrRerolls) + "リロール制限に達しました。"
+            "望ましいseedが見つかりません。"
+            "再度自動リロールをお試しください。",
         QMessageBox::Ok);
     msg->exec();
     delete msg;
@@ -462,14 +460,16 @@ void MainWindow::openSettings()
 void MainWindow::generatePrecalc()
 {
   QMessageBox* msg = new QMessageBox(
-      QMessageBox::Warning, "Precalculation file",
-      "You are about to start the generation of a precalculation file for the chosen game. This "
-      "generation will take a few hours to complete depending on your CPU and thread count. "
-      "Consider downloading the file instead which should have been distributed along the release "
-      "of this program.\n\nDo you really want to start the file generation process?",
-      QMessageBox::No | QMessageBox::Yes, this);
+      QMessageBox::Warning, "事前計算ファイル",
+      "選択したゲームの事前計算を生成しようとしています。"
+      "この作業はお使いのPCのCPUやスレッド数にもよりますが、数時間かかる事が予想されます。"
+      "代わりに、本プログラムがリリースされている場所に配置されているファイルをダウンロードすること"
+      "も可能です。\n本当に事前計算ファイルの生成を開始しますか？ ",
+      QMessageBox::NoButton, this);
+  QAbstractButton* pButtonNo = msg->addButton(tr("いいえ"), QMessageBox::NoRole);
+  QAbstractButton* pButtonYes = msg->addButton(tr("はい"), QMessageBox::YesRole);
   msg->exec();
-  if (msg->result() == QMessageBox::Yes)
+  if (msg->clickedButton() == pButtonYes)
   {
     unsigned int threadCount = SConfig::getInstance().getThreadLimit();
     if (threadCount == 0)
@@ -478,12 +478,11 @@ void MainWindow::generatePrecalc()
     delete m_dlgProgressPrecalc;
     m_dlgProgressPrecalc = new QProgressDialog(this);
     m_dlgProgressPrecalc->setWindowModality(Qt::WindowModal);
-    m_dlgProgressPrecalc->setWindowTitle(tr("Precalculation file generation"));
-    m_dlgProgressPrecalc->setCancelButtonText(tr("&Cancel"));
+    m_dlgProgressPrecalc->setWindowTitle(tr("事前計算ファイルを作っています"));
+    m_dlgProgressPrecalc->setCancelButtonText(tr("キャンセル"));
     m_dlgProgressPrecalc->setMinimum(0);
-    m_dlgProgressPrecalc->setLabelText("Precalculating " +
-                                       QString::number(Common::nbrPossibleSeeds) + " seeds with " +
-                                       QString::number(threadCount) + " threads...");
+    m_dlgProgressPrecalc->setLabelText("事前計算 " +
+                                       QString::number(Common::nbrPossibleSeeds) + " seeds");
     m_dlgProgressPrecalc->setMaximum(65536);
     connect(m_dlgProgressPrecalc, &QProgressDialog::canceled, this, [=]() {
       m_cancelPrecalc = true;
@@ -508,8 +507,8 @@ void MainWindow::precalcDone()
 {
   m_dlgProgressPrecalc->setValue(m_dlgProgressPrecalc->maximum());
   QMessageBox* msg =
-      new QMessageBox(QMessageBox::Information, "Precalculation success",
-                      "The precalculation file was created successfully.", QMessageBox::Ok);
+      new QMessageBox(QMessageBox::Information, "結果",
+                      "事前計算成功", QMessageBox::Ok);
   msg->exec();
   delete msg;
 }

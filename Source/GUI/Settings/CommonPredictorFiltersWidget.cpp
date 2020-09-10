@@ -1,4 +1,4 @@
-#include "CommonPredictorFiltersWidget.h"
+﻿#include "CommonPredictorFiltersWidget.h"
 
 #include <QFormLayout>
 #include <QGridLayout>
@@ -10,7 +10,7 @@
 
 CommonPredictorFiltersWidget::CommonPredictorFiltersWidget(QWidget* parent) : QWidget(parent)
 {
-  QLabel* lblIvs = new QLabel(tr("Filter wanted predictions by\nthe following minimal IVs"));
+  QLabel* lblIvs = new QLabel(tr("以下で設定された個体値以上の個体が予測に適用されます。"));
 
   QLabel* lblHpIv = new QLabel(tr("HP: "));
   m_spnMinHpIv = new QSpinBox();
@@ -19,42 +19,42 @@ CommonPredictorFiltersWidget::CommonPredictorFiltersWidget(QWidget* parent) : QW
   m_spnMinHpIv->setValue(0);
   m_spnMinHpIv->setMaximumWidth(75);
 
-  QLabel* lblAtkIv = new QLabel(tr("Attack: "));
+  QLabel* lblAtkIv = new QLabel(tr("攻撃: "));
   m_spnMinAtkIv = new QSpinBox();
   m_spnMinAtkIv->setMinimum(0);
   m_spnMinAtkIv->setMaximum(31);
   m_spnMinAtkIv->setValue(0);
   m_spnMinAtkIv->setMaximumWidth(75);
 
-  QLabel* lblDefIv = new QLabel(tr("Defense: "));
+  QLabel* lblDefIv = new QLabel(tr("防御: "));
   m_spnMinDefIv = new QSpinBox();
   m_spnMinDefIv->setMinimum(0);
   m_spnMinDefIv->setMaximum(31);
   m_spnMinDefIv->setValue(0);
   m_spnMinDefIv->setMaximumWidth(75);
 
-  QLabel* lblSpAtkIv = new QLabel(tr("Special Attack: "));
+  QLabel* lblSpAtkIv = new QLabel(tr("特攻: "));
   m_spnMinSpAtkIv = new QSpinBox();
   m_spnMinSpAtkIv->setMinimum(0);
   m_spnMinSpAtkIv->setMaximum(31);
   m_spnMinSpAtkIv->setValue(0);
   m_spnMinSpAtkIv->setMaximumWidth(75);
 
-  QLabel* lblSpDefIv = new QLabel(tr("Special Defense: "));
+  QLabel* lblSpDefIv = new QLabel(tr("特防: "));
   m_spnMinSpDefIv = new QSpinBox();
   m_spnMinSpDefIv->setMinimum(0);
   m_spnMinSpDefIv->setMaximum(31);
   m_spnMinSpDefIv->setValue(0);
   m_spnMinSpDefIv->setMaximumWidth(75);
 
-  QLabel* lblSpeedIv = new QLabel(tr("Speed: "));
+  QLabel* lblSpeedIv = new QLabel(tr("素早さ: "));
   m_spnMinSpeedIv = new QSpinBox();
   m_spnMinSpeedIv->setMinimum(0);
   m_spnMinSpeedIv->setMaximum(31);
   m_spnMinSpeedIv->setValue(0);
   m_spnMinSpeedIv->setMaximumWidth(75);
 
-  QLabel* lblHiddenPowerPower = new QLabel(tr("Minimum power of Hidden power: "));
+  QLabel* lblHiddenPowerPower = new QLabel(tr("希望するめざめるパワーの威力の最低値:"));
   m_spnMinPowerHiddenPower = new QSpinBox();
   m_spnMinPowerHiddenPower->setMinimum(30);
   m_spnMinPowerHiddenPower->setMaximum(70);
@@ -87,7 +87,7 @@ CommonPredictorFiltersWidget::CommonPredictorFiltersWidget(QWidget* parent) : QW
   m_naturesWidget->setLayout(naturesChkLayout);
   m_naturesWidget->setEnabled(false);
 
-  m_chkEnableNatureFilter = new QCheckBox(tr("Filter wanted predictions by nature"), this);
+  m_chkEnableNatureFilter = new QCheckBox(tr("以下で設定された性格が予測に適用されます。"), this);
   connect(m_chkEnableNatureFilter, &QCheckBox::stateChanged, this,
           [=](int state) { m_naturesWidget->setEnabled(state == Qt::CheckState::Checked); });
 
@@ -105,7 +105,7 @@ CommonPredictorFiltersWidget::CommonPredictorFiltersWidget(QWidget* parent) : QW
   m_typesWidget->setEnabled(false);
 
   m_chkEnableHiddenPowerTypeFilter =
-      new QCheckBox(tr("Filter wanted predictions by hidden power type"), this);
+      new QCheckBox(tr("以下で設定されためざめるパワーのタイプが予測に適用されます"), this);
   connect(m_chkEnableHiddenPowerTypeFilter, &QCheckBox::stateChanged, this,
           [=](int state) { m_typesWidget->setEnabled(state == Qt::CheckState::Checked); });
 

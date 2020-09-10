@@ -1,4 +1,4 @@
-#include "GeneralTab.h"
+﻿#include "GeneralTab.h"
 
 #include <QFormLayout>
 #include <QGroupBox>
@@ -8,21 +8,19 @@
 
 GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
 {
-  QLabel* lblDetectedThreadDescription = new QLabel(tr("Amount of threads detected on this CPU: "));
+  QLabel* lblDetectedThreadDescription = new QLabel(tr("お使いのPCのスレッド数: "));
   QLabel* lblDetectedThread = new QLabel(QString::number(std::thread::hardware_concurrency()));
 
-  QLabel* lblThreadLimit = new QLabel(tr("Amount of threads to use in this program: "));
+  QLabel* lblThreadLimit = new QLabel(tr("本プログラムで使用するスレッド数: "));
   m_cmbThreadLimit = new QComboBox(this);
-  m_cmbThreadLimit->addItem(tr("All threads"));
+  m_cmbThreadLimit->addItem(QString::number(std::thread::hardware_concurrency()));
   for (unsigned int i = 1; i < std::thread::hardware_concurrency(); i++)
     m_cmbThreadLimit->addItem(QString::number(i));
   m_cmbThreadLimit->setCurrentIndex(0);
 
   QLabel* lblThreadLimitDescription =
-      new QLabel(tr("This setting allows you to limit the number of threads the program can use "
-                    "for the algorithms of the seed finder and the precalculation file generation. "
-                    "This will make them slower, but will allow critical CPU intensive "
-                    "applications such as a live streaming software to function properly."));
+      new QLabel(tr("この設定では、本プログラムが使用できるスレッド数を制限することができます。"
+					"スレッド数を制限すると本プログラムの動作は遅くなりますが、配信ソフト等のCPU負荷が高いソフトウェアを正しく動作させることが可能になります。"));
   lblThreadLimitDescription->setWordWrap(true);
 
   QFormLayout* threadLimitLayout = new QFormLayout;
@@ -35,11 +33,11 @@ GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
   cpuSettingsLayout->addSpacing(10);
   cpuSettingsLayout->addWidget(lblThreadLimitDescription);
 
-  QGroupBox* gbCPUSettings = new QGroupBox(tr("CPU settings"));
+  QGroupBox* gbCPUSettings = new QGroupBox(tr("CPU設定"));
   gbCPUSettings->setLayout(cpuSettingsLayout);
 
   QLabel* lblPredictionsTime =
-      new QLabel(tr("Amount of time to generate predictions (in seconds): "));
+      new QLabel(tr("予測を生成する時間の幅（秒）: "));
   m_spbPredictionsTime = new QSpinBox();
   m_spbPredictionsTime->setMinimum(0);
   m_spbPredictionsTime->setValue(10);
@@ -48,7 +46,7 @@ GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
   m_spbPredictionsTime->setMaximumWidth(150);
 
   QLabel* lblFrameOffset =
-      new QLabel(tr("Offset to apply to the amount of frames of the predictions: "));
+      new QLabel(tr("オフセットするフレーム数: "));
   m_spbFrameOffset = new QSpinBox();
   m_spbFrameOffset->setMinimum(-100);
   m_spbFrameOffset->setValue(0);
@@ -56,7 +54,7 @@ GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
   m_spbFrameOffset->setMaximumWidth(150);
 
   QLabel* lblMaxAutoReroll =
-      new QLabel(tr("Number of maximum reroll to perform when auto rerolling: "));
+      new QLabel(tr("自動リロールの際に実行する最大リロール数: "));
   m_spbMaxAutoReroll = new QSpinBox();
   m_spbMaxAutoReroll->setMinimum(1);
   m_spbMaxAutoReroll->setMaximum(10000);
@@ -69,17 +67,21 @@ GeneralTab::GeneralTab(QWidget* parent) : QWidget(parent)
   predictionTimeLayout->addRow(lblFrameOffset, m_spbFrameOffset);
   predictionTimeLayout->addRow(lblMaxAutoReroll, m_spbMaxAutoReroll);
 
-  QGroupBox* gbPredictor = new QGroupBox(tr("Starters predictor"));
+  QGroupBox* gbPredictor = new QGroupBox(tr("プレディクター設定"));
   gbPredictor->setLayout(predictionTimeLayout);
 
   m_chkRestorePreviousWindowGeometry = new QCheckBox(
-      "Restore the previous main window's position and size at the start of the program");
+      "本プログラム起動時のウィンドウの位置とサイズを保存する");
   m_chkRestorePreviousWindowGeometry->setChecked(false);
 
+   QLabel* credits =
+      new QLabel(tr("チュートリアル:\n https://ch.nicovideo.jp/tika_EX/blomaga/ar1852415 \n\n助けてくれてありがとうバルタンさん\n https://twitter.com/balbalgabaltan"));
+  
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(gbCPUSettings);
   mainLayout->addWidget(gbPredictor);
   mainLayout->addWidget(m_chkRestorePreviousWindowGeometry);
+  mainLayout->addWidget(credits);
   mainLayout->addStretch();
 
   setLayout(mainLayout);

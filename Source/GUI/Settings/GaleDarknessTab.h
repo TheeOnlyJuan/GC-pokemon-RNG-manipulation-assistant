@@ -19,7 +19,7 @@ public:
 
   void setShininess(const GUICommon::shininess shininess);
   void setGender(const GUICommon::gender gender);
-  void setPalVersionEnabled(const bool palVersionEnabled);
+  //void setPalVersionEnabled(const bool palVersionEnabled);
 
 private:
   CommonPredictorFiltersWidget* m_predictorFiltersEevee;

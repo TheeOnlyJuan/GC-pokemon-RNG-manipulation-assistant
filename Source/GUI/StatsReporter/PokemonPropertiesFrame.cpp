@@ -55,15 +55,15 @@ PokemonPropertiesFrame::PokemonPropertiesFrame(const QString pokemonName, const 
 
   QLabel* lblHpIvHeader = new QLabel("HP");
   lblHpIvHeader->setAlignment(Qt::AlignCenter);
-  QLabel* lblAtkIvHeader = new QLabel("Atk");
+  QLabel* lblAtkIvHeader = new QLabel("攻撃");
   lblAtkIvHeader->setAlignment(Qt::AlignCenter);
-  QLabel* lblDefIvHeader = new QLabel("Def");
+  QLabel* lblDefIvHeader = new QLabel("防御");
   lblDefIvHeader->setAlignment(Qt::AlignCenter);
-  QLabel* lblSpAtkIvHeader = new QLabel("SpA");
+  QLabel* lblSpAtkIvHeader = new QLabel("特攻");
   lblSpAtkIvHeader->setAlignment(Qt::AlignCenter);
-  QLabel* lblSpDefIvHeader = new QLabel("SpD");
+  QLabel* lblSpDefIvHeader = new QLabel("特防");
   lblSpDefIvHeader->setAlignment(Qt::AlignCenter);
-  QLabel* lblSpeedIvHeader = new QLabel("Spe");
+  QLabel* lblSpeedIvHeader = new QLabel("素早さ");
   lblSpeedIvHeader->setAlignment(Qt::AlignCenter);
 
   QHBoxLayout* ivsHeaderLayout = new QHBoxLayout;

@@ -1,4 +1,4 @@
-#include "SeedFinderWizard.h"
+﻿#include "SeedFinderWizard.h"
 
 #include <thread>
 
@@ -21,13 +21,13 @@ SeedFinderWizard::SeedFinderWizard(QWidget* parent, const GUICommon::gameSelecti
   numberPass = 1;
   m_cancelSeedFinderPass = false;
   m_seedFinderFuture = QFuture<void>();
-  setPage(pageID::Start, new StartPage(this, game));
+  //setPage(pageID::Start, new StartPage(this, game));
   setPage(pageID::Instructions, new InstructionsPage(this, game));
   setPage(pageID::SeedFinderPass, getSeedFinderPassPageForGame());
-  setStartId(pageID::Start);
+  setStartId(pageID::Instructions);
 
   setOptions(QWizard::HaveCustomButton1);
-  setButtonText(QWizard::CustomButton1, "&Next Pass >");
+  setButtonText(QWizard::CustomButton1, "次 >");
   connect(this, &SeedFinderWizard::customButtonClicked, this, [=](int which) {
     if (which == QWizard::CustomButton1)
       nextSeedFinderPass();
@@ -42,7 +42,7 @@ SeedFinderWizard::SeedFinderWizard(QWidget* parent, const GUICommon::gameSelecti
   connect(button(QWizard::NextButton), &QAbstractButton::clicked, this,
           &SeedFinderWizard::pageChanged);
 
-  setWindowTitle(tr("Seed Finder Wizard"));
+  setWindowTitle(tr("Seed値特定"));
   setWizardStyle(QWizard::ModernStyle);
 
   QList<QWizard::WizardButton> btnlayout;
@@ -87,10 +87,10 @@ SeedFinderPassPage* SeedFinderWizard::getSeedFinderPassPageForGame()
     return nullptr;
   }
   m_passPages.append(page);
-  QString strResultStatus("No passes done");
+  QString strResultStatus("　？？？　");
   if (m_seeds.size() > 1)
-    strResultStatus = QString::number(m_seeds.size()) + QString(" results");
-  page->setTitle("Seed Finder Pass #" + QString::number(numberPass) + " (" + strResultStatus + ")");
+    strResultStatus = QString::number(m_seeds.size()) + QString(" 検索結果");
+  page->setTitle("Seed値特定　試行" + QString::number(numberPass) + "回目 (" + strResultStatus + ")");
   adjustSize();
   return page;
 }
@@ -167,6 +167,7 @@ void SeedFinderWizard::reject()
   }
   else
   {
+    /*
     QMessageBox* cancelPrompt =
         new QMessageBox(QMessageBox::Question, "Seed Finder Cancellation",
                         "Are you sure you want to cancel the seed finding procedure?",
@@ -177,11 +178,16 @@ void SeedFinderWizard::reject()
       m_cancelSeedFinderPass = true;
       m_seedFinderFuture.waitForFinished();
       QWizard::reject();
-    }
-    delete cancelPrompt;
+    } 
+	*/
+    m_cancelSeedFinderPass = true;
+    m_seedFinderFuture.waitForFinished();
+    QWizard::reject();
+    //delete cancelPrompt;
   }
 }
 
+//This page is currently pretty useless so it is emitted
 StartPage::StartPage(QWidget* parent, const GUICommon::gameSelection game) : QWizardPage(parent)
 {
   setTitle(tr("Introduction"));
@@ -211,13 +217,11 @@ int StartPage::nextId() const
 InstructionsPage::InstructionsPage(QWidget* parent, const GUICommon::gameSelection game)
     : QWizardPage(parent)
 {
-  setTitle(tr("Instructions"));
-  setSubTitle(tr("Follow these detailled instructions before starting the seed finding procedure"));
+  setTitle(tr("使い方"));
+  //setSubTitle(tr("Follow these detailled instructions before starting the seed finding procedure"));
 
   QLabel* lblSummary = new QLabel(
-      "This procedure involves generating random battle teams over and over which gives more and "
-      "more information about your seed so that it is found by narrowing it down to one possible "
-      "one.",
+      "ここでは、「とにかくバトル」のチーム編成のパターンを何回か入力することで現在のseed値を絞ります。",
       this);
   lblSummary->setWordWrap(true);
 
@@ -225,45 +229,38 @@ InstructionsPage::InstructionsPage(QWidget* parent, const GUICommon::gameSelecti
   {
   case GUICommon::gameSelection::Colosseum:
     m_lblGameInstructions = new QLabel(tr(
-        "\nUpon reaching the main menu in the game, naviguate to Battle Now -> Single Battle -> "
-        "Ultimate. You should see a confirmation screen of a battle with a randomly generated "
-        "team. The seed finder will ask you for the informations displayed on this screen so make "
-        "sure you input them correctly. After entering the information and confirming everything, "
-        "wait that the pass is done. Once done, back off the confirmation screen (NEVER accept it "
-        "or it will invalidate the procedure) and select Single Battle -> Ultimate again; you are "
-        "now ready to enter the informations of the next pass. You have to do this several times "
-        "until only 1 result is left, you can see the number of results after each pass in the "
-        "title of the wizard page. Note: NEVER go back to the main menu during this procedure or "
-        "it will invalidate it."));
+        "\nゲームを開始してメインメニューに入り、「対戦モード」→「とにかくバトル」→「シングルバトル」→「さいきょう」の順に選択します。\n"
+           "ランダムに生成されたチーム編成が表示されるので、表示された\n「プレイヤーの名前」と「先頭のポケモンの名前 をチェック欄に正しく記入します。\n"
+		   "記入が終わったらゲームではとにかくバトルの画面に戻り、次のパスに進みます。\n"
+		   "（ここで間違って戦闘を開始したり、メインメニューに戻ると正しく機能しなくなります。\n）"
+           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n"
+           "説明は以上です。「次へ」をクリックするとseed値特定が開始されます。"));
     break;
   case GUICommon::gameSelection::XD:
     m_lblGameInstructions = new QLabel(tr(
-        "\nUpon reaching the main menu in the game, naviguate to VS Mode -> Quick Battle -> "
-        "Single Battle -> Ultimate. You should see a confirmation screen of a battle with a "
-        "randomly generated team. The seed finder will ask you for the informations displayed on "
-        "this screen so make sure you input them correctly. After entering the information and "
-        "confirming everything, wait that the pass is done. Once done, back off the confirmation "
-        "screen (NEVER accept it or it will invalidate the procedure) and select Single Battle -> "
-        "Ultimate again; you are now ready to enter the informations of the next pass. You have to "
-        "do this several times until only 1 result is left, you can see the number of results "
-        "after each pass in the title of the wizard page. Note: NEVER go back to the main menu "
-        "during this procedure or it will invalidate it."));
+        "\nゲームを開始してメインメニューに入り、「対戦モード」→「シングルバトル」→「さいきょう」の順に選択します。\n"
+           "ランダムに生成されたチーム編成が表示されるので、表示された\n「プレイヤーの名前」と「先頭"
+           "のポケモンの名前」をチェック欄に正しく記入します。\n"
+           "記入が終わったらゲームではとにかくバトルの画面に戻り、次のパスに進みます。\n"
+           "（ここで間違って戦闘を開始したり、メインメニューに戻ると正しく機能しなくなります。）\n"
+           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n"
+           "説明は以上です。「次へ」をクリックするとseed値特定が開始されます。"));
     break;
   default:
     m_lblGameInstructions = new QLabel("");
     break;
   }
-
+  /*
   QLabel* lblNext = new QLabel(
       tr("\nPress \"Next\" once you acknowledged the above instructions to start the seed "
          "finding procedure."));
   lblNext->setWordWrap(true);
   m_lblGameInstructions->setWordWrap(true);
-
+*/
   QVBoxLayout* instructionsLayout = new QVBoxLayout;
   instructionsLayout->addWidget(lblSummary);
   instructionsLayout->addWidget(m_lblGameInstructions);
-  instructionsLayout->addWidget(lblNext);
+  //instructionsLayout->addWidget(lblNext);
   instructionsLayout->addStretch();
 
   QWidget* instructionsWidget = new QWidget(this);
@@ -290,46 +287,43 @@ EndPage::EndPage(QWidget* parent, const bool sucess, const GUICommon::gameSelect
                  const u32 seed)
     : QWizardPage(parent)
 {
-  setTitle(tr("End"));
+  setTitle(tr("終了"));
 
   if (sucess)
   {
     QString additionalNotes("");
     if (game == GUICommon::gameSelection::Colosseum)
-      additionalNotes = tr("You MUST use a preset name for the predictions to work.");
+      additionalNotes = tr("プレイヤーの名前は、必ず「レオ」などのデフォルトネームを使用してください。");
 
-    QString predictorInstructions =
-        "Predictions of the starters will appear depending on the amount of frames "
+    QString predictorInstructions = "";
+ /*       "Predictions of the starters will appear depending on the amount of frames "
         "between pressing A on starting a new game and pressing A on the trainer name "
         "confirmation.";
     if (game == GUICommon::gameSelection::XD && GaleDarknessRNGSystem::getPalEnabled())
       predictorInstructions =
           "There will only be a single prediction in the prediction list, this will be your "
           "starter no matter how many frames you spend on the naming screen.";
-
+*/
     m_lblResult = new QLabel(
-        "The seed finding procedure completed sucessfully.\n\n" + QString("Your current seed is ") +
+        "Seed値特定が完了しました。\n\n" + QString("現在のseed値は ") +
             QString("%1").arg(seed, 8, 16, QChar('0')).toUpper() +
             QString(
-                "\n\n" + predictorInstructions +
-                " Desired predictions will appear in green while undesired ones "
-                "will appear in red (you may configure the filters in the settings). If you "
-                "are unsatisfied with the predictions, generate another team and click the "
-                "reroll or autoreroll button. You may only go back to the main menu of the game if "
-                "you are satisfied with the predictions. You may also use the stats reporter when "
-                "you select a prediction which allows you to see the possible secondaries "
-                "stats. ") +
-            additionalNotes +
-            QString("\n\nClick \"Finish\" to see your prediction in "
-                    "the previous window."),
+                "です。\n\n" + predictorInstructions +
+                "エーフィとブラッキーの予測値が表示されます。\n"
+				"ここでのフレーム数とは、「新しく始める」を選択した瞬間（メモリーカードにデータがある場合は「はい」を選択した瞬間）"
+				"から、プレイヤーの名前の確認画面で「はい」を選択するまでのフレーム数を表しています。\n"
+				"望ましい予測値は緑、それ以外は赤でハイライトされます。（希望する予測値は設定から入力できます。）\n"
+				"もし表示された予測値で不満な場合は、リロールもしくはオートリロールをクリックします。（リロールの回数だけチーム生成を行って下さい。）\n"
+				"結果に満足な場合は、メインメニューに戻って下さい。\n"
+				"画面右側の欄は、マグマラシ、アリゲイツ、ベイリーフのステータスを入力すると個体値、めざめるパワーを自動で特定できます。\n"
+				+ additionalNotes +"「終了」をクリックすると予測値が表示されます。"),
         this);
   }
   else
   {
     m_lblResult = new QLabel(
-        "The seed finding procedure completed, but your current seed hasn't been found. You have "
-        "to restart this entire procedure again (this implies that you must soft reset the "
-        "console).");
+        "検索は終了しましたが、現在のSeed値は発見されませんでした。\n"
+		"もう一度はじめからやり直してください（ゲームのリセットを含む）。");
   }
   m_lblResult->setWordWrap(true);
 

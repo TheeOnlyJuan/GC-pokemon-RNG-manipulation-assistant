@@ -69,6 +69,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <OpenMPSupport>true</OpenMPSupport>
       <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -130,6 +131,7 @@
     <ClInclude Include="pokemonrngsystem\BaseRNGSystem.h" />
     <ClInclude Include="pokemonrngsystem\colosseum\ColosseumRNGSystem.h" />
     <ClInclude Include="pokemonrngsystem\xd\GaleDarknessRNGSystem.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include=".clang-format" />
@@ -138,6 +140,9 @@
   <ItemGroup>
     <None Include="qt.conf" />
     <None Include="Qt.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GC-pokemon-RNG-manipulation-assistant.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

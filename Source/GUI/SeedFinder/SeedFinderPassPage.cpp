@@ -16,7 +16,7 @@
 SeedFinderPassPage::SeedFinderPassPage(QWidget* parent, const int nbrFoundSeeds)
     : QWizardPage(parent)
 {
-  setSubTitle("Fill in the informations you see on the battle confirmation screen");
+  //setSubTitle("Fill in the informations you see on the battle confirmation screen");
 
   QLabel* label = new QLabel(QString::number(SeedFinderWizard::numberPass));
   m_pbSeedFinder = new QProgressBar(this);
@@ -34,8 +34,7 @@ SeedFinderPassPage::SeedFinderPassPage(QWidget* parent, const int nbrFoundSeeds)
     m_pbSeedFinder->setMaximum(nbrFoundSeeds);
     m_pbSeedFinder->setValue(0);
     m_lblSeedFinderStatus =
-        new QLabel("Simulating " + QString::number(nbrFoundSeeds) + " seeds using " +
-                   QString::number(std::thread::hardware_concurrency()) + " thread(s)...");
+        new QLabel(QString::number(nbrFoundSeeds) + " seedsを比較する");
   }
   m_lblSeedFinderStatus->setVisible(false);
   m_lblSeedFinderStatus->setAlignment(Qt::AlignHCenter);
@@ -80,9 +79,9 @@ SeedFinderPassColosseum::SeedFinderPassColosseum(QWidget* parent, const int nbrF
 {
   m_playerNameIndexBtnGroup = new QButtonGroup(this);
 
-  QRadioButton* rbtnWes = new QRadioButton("Wes", this);
-  QRadioButton* rbtnSeth = new QRadioButton("Seth", this);
-  QRadioButton* rbtnThomas = new QRadioButton("Thomas", this);
+  QRadioButton* rbtnWes = new QRadioButton("レオ", this);
+  QRadioButton* rbtnSeth = new QRadioButton("ユータ", this);
+  QRadioButton* rbtnThomas = new QRadioButton("タツキ", this);
 
   m_playerNameIndexBtnGroup->addButton(rbtnWes, ColosseumRNGSystem::QuickBattlePlayerName::Wes);
   m_playerNameIndexBtnGroup->addButton(rbtnSeth, ColosseumRNGSystem::QuickBattlePlayerName::Seth);
@@ -104,14 +103,14 @@ SeedFinderPassColosseum::SeedFinderPassColosseum(QWidget* parent, const int nbrF
 
   m_playerTeamIndexBtnGroup = new QButtonGroup(this);
 
-  QRadioButton* rbtnBlaziken = new QRadioButton("Blaziken", this);
-  QRadioButton* rbtnEntei = new QRadioButton("Entei", this);
-  QRadioButton* rbtnSwampert = new QRadioButton("Swampert", this);
-  QRadioButton* rbtnRaikou = new QRadioButton("Raikou", this);
-  QRadioButton* rbtnMeganium = new QRadioButton("Meganium", this);
-  QRadioButton* rbtnSuicune = new QRadioButton("Suicune", this);
-  QRadioButton* rbtnMetagross = new QRadioButton("Metagross", this);
-  QRadioButton* rbtnHeracross = new QRadioButton("Heracross", this);
+  QRadioButton* rbtnBlaziken = new QRadioButton("バシャーモ", this);
+  QRadioButton* rbtnEntei = new QRadioButton("エンテイ", this);
+  QRadioButton* rbtnSwampert = new QRadioButton("ラグラージ", this);
+  QRadioButton* rbtnRaikou = new QRadioButton("ライコウ", this);
+  QRadioButton* rbtnMeganium = new QRadioButton("メガニウム", this);
+  QRadioButton* rbtnSuicune = new QRadioButton("スイクン", this);
+  QRadioButton* rbtnMetagross = new QRadioButton("メタグロス", this);
+  QRadioButton* rbtnHeracross = new QRadioButton("ヘラクロス", this);
 
   m_playerTeamIndexBtnGroup->addButton(rbtnBlaziken,
                                        ColosseumRNGSystem::QuickBattleTeamLeader::Blaziken);
@@ -154,8 +153,8 @@ SeedFinderPassColosseum::SeedFinderPassColosseum(QWidget* parent, const int nbrF
   rbtnTeamLayout->addLayout(rbtnTeamLayout1);
   rbtnTeamLayout->addLayout(rbtnTeamLayout2);
 
-  QLabel* lblName = new QLabel("Choose your generated trainer name");
-  QLabel* lblTeam = new QLabel("Choose the leader of your generated team");
+  QLabel* lblName = new QLabel("プレイヤーの名前");
+  QLabel* lblTeam = new QLabel("先頭のポケモン");
 
   QVBoxLayout* inputLayout = new QVBoxLayout;
   inputLayout->addWidget(lblName);
@@ -193,11 +192,11 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
 {
   m_playerTeamIndexBtnGroup = new QButtonGroup(this);
 
-  QRadioButton* rbtnMewtwo = new QRadioButton("Mewtwo", this);
-  QRadioButton* rbtnMew = new QRadioButton("Mew", this);
-  QRadioButton* rbtnDeoxys = new QRadioButton("Deoxys", this);
-  QRadioButton* rbtnRayquaza = new QRadioButton("Rayquaza", this);
-  QRadioButton* rbtnJirachi = new QRadioButton("Jirachi", this);
+  QRadioButton* rbtnMewtwo = new QRadioButton("ミュウツー", this);
+  QRadioButton* rbtnMew = new QRadioButton("ミュウ", this);
+  QRadioButton* rbtnDeoxys = new QRadioButton("デオキシス", this);
+  QRadioButton* rbtnRayquaza = new QRadioButton("レックウザ", this);
+  QRadioButton* rbtnJirachi = new QRadioButton("ジラーチ", this);
 
   m_playerTeamIndexBtnGroup->addButton(rbtnMewtwo,
                                        GaleDarknessRNGSystem::BattleNowTeamLeaderPlayer::Mewtwo);
@@ -217,7 +216,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
     button->setMinimumWidth(125);
   }
 
-  QLabel* lblPlayerTeam = new QLabel("Choose the leader of your generated team", this);
+  QLabel* lblPlayerTeam = new QLabel("先頭のポケモン", this);
   lblPlayerTeam->setWordWrap(true);
 
   QVBoxLayout* rbtnPlayerTeamLayout = new QVBoxLayout;
@@ -230,11 +229,11 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
 
   m_enemyTeamIndexBtnGroup = new QButtonGroup(this);
 
-  QRadioButton* rbtnArticuno = new QRadioButton("Articuno", this);
-  QRadioButton* rbtnZapdos = new QRadioButton("Zapdos", this);
-  QRadioButton* rbtnMoltres = new QRadioButton("Moltres", this);
-  QRadioButton* rbtnKangaskhan = new QRadioButton("Kangaskhan", this);
-  QRadioButton* rbtnLatias = new QRadioButton("Latias", this);
+  QRadioButton* rbtnArticuno = new QRadioButton("フリーザー", this);
+  QRadioButton* rbtnZapdos = new QRadioButton("サンダ", this);
+  QRadioButton* rbtnMoltres = new QRadioButton("ファイヤ", this);
+  QRadioButton* rbtnKangaskhan = new QRadioButton("ガルーラ", this);
+  QRadioButton* rbtnLatias = new QRadioButton("ラティアス", this);
 
   m_enemyTeamIndexBtnGroup->addButton(rbtnArticuno,
                                       GaleDarknessRNGSystem::BattleNowTeamLeaderEnemy::Articuno);
@@ -254,7 +253,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
     button->setMinimumWidth(150);
   }
 
-  QLabel* lblEnemyTeam = new QLabel("Choose the leader of your opponent's generated team", this);
+  QLabel* lblEnemyTeam = new QLabel("相手の先頭のポケモン", this);
   lblEnemyTeam->setWordWrap(true);
 
   QVBoxLayout* rbtnEnemyTeamLayout = new QVBoxLayout;
@@ -269,7 +268,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
   rbtnTeamLayout->addLayout(rbtnPlayerTeamLayout);
   rbtnTeamLayout->addLayout(rbtnEnemyTeamLayout);
 
-  QLabel* lblTopLeftPkmnHP = new QLabel("Top left", this);
+  QLabel* lblTopLeftPkmnHP = new QLabel("左上", this);
   lblTopLeftPkmnHP->setWordWrap(true);
   lblTopLeftPkmnHP->setAlignment(Qt::AlignHCenter);
   m_spnTopLeftPkmnHP = new QSpinBox(this);
@@ -280,7 +279,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
   topLeftPkmnHPLayout->addWidget(lblTopLeftPkmnHP);
   topLeftPkmnHPLayout->addWidget(m_spnTopLeftPkmnHP);
 
-  QLabel* lblBottomLeftPkmnHP = new QLabel("Bottom left", this);
+  QLabel* lblBottomLeftPkmnHP = new QLabel("左下", this);
   lblBottomLeftPkmnHP->setWordWrap(true);
   lblBottomLeftPkmnHP->setAlignment(Qt::AlignHCenter);
   m_spnBottomLeftPkmnHP = new QSpinBox(this);
@@ -291,7 +290,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
   bottomLeftPkmnHPLayout->addWidget(lblBottomLeftPkmnHP);
   bottomLeftPkmnHPLayout->addWidget(m_spnBottomLeftPkmnHP);
 
-  QLabel* lblTopRightPkmnHP = new QLabel("Top right", this);
+  QLabel* lblTopRightPkmnHP = new QLabel("右上", this);
   lblTopRightPkmnHP->setWordWrap(true);
   lblTopRightPkmnHP->setAlignment(Qt::AlignHCenter);
   m_spnTopRightPkmnHP = new QSpinBox(this);
@@ -302,7 +301,7 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
   topRightPkmnHPLayout->addWidget(lblTopRightPkmnHP);
   topRightPkmnHPLayout->addWidget(m_spnTopRightPkmnHP);
 
-  QLabel* lblBottomRightPkmnHP = new QLabel("Bottom right", this);
+  QLabel* lblBottomRightPkmnHP = new QLabel("右下", this);
   lblBottomRightPkmnHP->setWordWrap(true);
   lblBottomRightPkmnHP->setAlignment(Qt::AlignHCenter);
   m_spnBottomRightPkmnHP = new QSpinBox(this);
@@ -337,12 +336,12 @@ SeedFinderPassXD::SeedFinderPassXD(QWidget* parent, const int nbrFoundSeeds)
   QLabel* lblPkmnHP = new QLabel(this);
   if (nbrFoundSeeds == 0)
   {
-    lblPkmnHP->setText(tr("You will enter the Pokémon HP starting from the next pass"));
+    lblPkmnHP->setText(tr("HP値は必要ありません"));
     m_pkmnHPWidget->setEnabled(false);
   }
   else
   {
-    lblPkmnHP->setText(tr("Enter the HP of the indicated Pokémon:"));
+    lblPkmnHP->setText(tr("HP値が必要:"));
   }
   lblPkmnHP->setAlignment(Qt::AlignHCenter);
 

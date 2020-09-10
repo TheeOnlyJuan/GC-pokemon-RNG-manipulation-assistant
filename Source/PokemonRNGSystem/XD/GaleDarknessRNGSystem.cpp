@@ -315,49 +315,49 @@ bool GaleDarknessRNGSystem::generateBattleTeam(u32& seed, const std::vector<int>
 
 std::string GaleDarknessRNGSystem::getLastObtainedCriteriasString()
 {
-  std::string criteriasString = "Player team leader: ";
+  std::string criteriasString = "先頭のポケモン: ";
   switch (m_lastObtainedCriterias[0])
   {
   case Mewtwo:
-    criteriasString += "MEWTWO";
+    criteriasString += "ミュウツー";
     break;
   case Mew:
-    criteriasString += "MEW";
+    criteriasString += "ミュウ";
     break;
   case Deoxys:
-    criteriasString += "DEOXYS";
+    criteriasString += "デオキシス";
     break;
   case Rayquaza:
-    criteriasString += "RAYQUAZA";
+    criteriasString += "レックウザ";
     break;
   case Jirachi:
-    criteriasString += "JIRACHI";
+    criteriasString += "ジラーチ";
     break;
   }
 
-  criteriasString += "\nComputer team leader: ";
+  criteriasString += "\n相手の先頭のポケモン: ";
   switch (m_lastObtainedCriterias[1])
   {
   case Articuno:
-    criteriasString += "ARTICUNO";
+    criteriasString += "フリーザー";
     break;
   case Zapdos:
-    criteriasString += "ZAPDOS";
+    criteriasString += "サンダ";
     break;
   case Moltres:
-    criteriasString += "MOLTRES";
+    criteriasString += "ファイヤ";
     break;
   case Kangaskhan:
-    criteriasString += "KANGASKHAN";
+    criteriasString += "ガルーラ";
     break;
   case Latias:
-    criteriasString += "LATIAS";
+    criteriasString += "ラティアス";
     break;
   }
 
-  criteriasString += "\nPlayer Pokémon's HP: " + std::to_string(m_lastObtainedCriterias[2]) + " " +
+  criteriasString += "\n先頭のポケモンのHP: " + std::to_string(m_lastObtainedCriterias[2]) + " " +
                      std::to_string(m_lastObtainedCriterias[3]) + "\n";
-  criteriasString += "Computer Pokémon's HP: " + std::to_string(m_lastObtainedCriterias[4]) + " " +
+  criteriasString += "相手の先頭のポケモンのHP: " + std::to_string(m_lastObtainedCriterias[4]) + " " +
                      std::to_string(m_lastObtainedCriterias[5]);
 
   return criteriasString;
@@ -447,14 +447,14 @@ int GaleDarknessRNGSystem::getNbrStartersPrediction()
 std::vector<std::string> GaleDarknessRNGSystem::getStartersName()
 {
   std::vector<std::string> name;
-  name.push_back("Eevee");
+  name.push_back("イーブイ");
   return name;
 }
 
 std::vector<std::string> GaleDarknessRNGSystem::getSecondariesName()
 {
   std::vector<std::string> names;
-  names.push_back("Teddiursa");
+  names.push_back("ヒメグマ");
   return names;
 }
 

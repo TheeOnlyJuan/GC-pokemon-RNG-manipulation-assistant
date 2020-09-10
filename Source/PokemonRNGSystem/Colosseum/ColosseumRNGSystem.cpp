@@ -1,4 +1,4 @@
-#include "ColosseumRNGSystem.h"
+﻿#include "ColosseumRNGSystem.h"
 
 #include <array>
 #include <string>
@@ -47,8 +47,8 @@ static const std::array<std::array<u8, 6>, 4> s_genderRatioDummyTeamsData = {
      {{0x7f, 0x7f, 0xff, 0x7f, 0x7f, 0x7f}}}};
 
 // Espeon first because it matters the most for speedruns
-static const std::array<std::string, 2> s_startersName = {{"Espeon", "Umbreon"}};
-static const std::array<std::string, 3> s_secondariesName = {{"Quilava", "Croconaw", "Bayleef"}};
+static const std::array<std::string, 2> s_startersName = {{"エーフィ", "ブラッキー"}};
+static const std::array<std::string, 3> s_secondariesName = {{"マグマラシ", "アリゲイツ", "ベイリーフ"}};
 
 // The gender ratio of the starters.
 static const u8 s_genderRatioStarters = 0x1f;
@@ -259,46 +259,46 @@ bool ColosseumRNGSystem::generateBattleTeam(u32& seed, const std::vector<int> cr
 
 std::string ColosseumRNGSystem::getLastObtainedCriteriasString()
 {
-  std::string criteriasString = "Name: ";
+  std::string criteriasString = "名前: ";
   switch (m_lastObtainedCriterias[1])
   {
   case Wes:
-    criteriasString += "WES";
+    criteriasString += "レオ";
     break;
   case Seth:
-    criteriasString += "SETH";
+    criteriasString += "ユータ";
     break;
   case Thomas:
-    criteriasString += "THOMAS";
+    criteriasString += "タツキ";
     break;
   }
 
-  criteriasString += "\nPlayer team leader: ";
+  criteriasString += "\n先頭のポケモン: ";
   switch (m_lastObtainedCriterias[0])
   {
   case Blaziken:
-    criteriasString += "BLAZIKEN";
+    criteriasString += "バシャーモ";
     break;
   case Entei:
-    criteriasString += "ENTEI";
+    criteriasString += "エンテイ";
     break;
   case Swampert:
-    criteriasString += "SWAMPERT";
+    criteriasString += "ラグラージ";
     break;
   case Raikou:
-    criteriasString += "RAIKOU";
+    criteriasString += "ライコウ";
     break;
   case Meganium:
-    criteriasString += "MEGANIUM";
+    criteriasString += "メガニウム";
     break;
   case Suicune:
-    criteriasString += "SUICUNE";
+    criteriasString += "スイクン";
     break;
   case Metagross:
-    criteriasString += "METAGROSS";
+    criteriasString += "メタグロス";
     break;
   case Heracross:
-    criteriasString += "HERACROSS";
+    criteriasString += "ヘラクロス";
     break;
   }
 

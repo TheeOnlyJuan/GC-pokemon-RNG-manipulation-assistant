@@ -1,30 +1,30 @@
-#include "GUICommon.h"
+﻿#include "GUICommon.h"
 
 #include <QObject>
 
 namespace GUICommon
 {
 QStringList gamesStr =
-    QStringList({QObject::tr("Pokemon Colosseum"), QObject::tr("Pokemon XD: Gale of Darkness")});
-QStringList platformsStr = QStringList({"Nintendo GameCube", "Nintendo Wii"});
+    QStringList({QObject::tr("ポケモンコロシアム"), QObject::tr("ポケモンＸＤ 闇の旋風ダーク・ルギア")});
+QStringList platformsStr = QStringList({"GC", "Wii"});
 
 QStringList naturesStr = QStringList(
-    {QObject::tr("Hardy"),   QObject::tr("Lonely"), QObject::tr("Brave"),   QObject::tr("Adamant"),
-     QObject::tr("Naughty"), QObject::tr("Bold"),   QObject::tr("Docile"),  QObject::tr("Relaxed"),
-     QObject::tr("Impish"),  QObject::tr("Lax"),    QObject::tr("Timid"),   QObject::tr("Hasty"),
-     QObject::tr("Serious"), QObject::tr("Jolly"),  QObject::tr("Naive"),   QObject::tr("Modest"),
-     QObject::tr("Mild"),    QObject::tr("Quiet"),  QObject::tr("Bashful"), QObject::tr("Rash"),
-     QObject::tr("Calm"),    QObject::tr("Gentle"), QObject::tr("Sassy"),   QObject::tr("Careful"),
-     QObject::tr("Quirky")});
+    {QObject::tr("がんばりや"),   QObject::tr("さみしがり"), QObject::tr("ゆうかん"),   QObject::tr("いじっぱり"),
+     QObject::tr("やんちゃ"), QObject::tr("ずぶとい"),   QObject::tr("すなお"),  QObject::tr("のんき"),
+     QObject::tr("わんぱく"),  QObject::tr("のうてんき"),    QObject::tr("おくびょう"),   QObject::tr("せっかち"),
+     QObject::tr("まじめ"), QObject::tr("ようき"),  QObject::tr("むじゃき"),   QObject::tr("ひかえめ"),
+     QObject::tr("おっとり"),    QObject::tr("れいせい"),  QObject::tr("てれや"), QObject::tr("うっかりや"),
+     QObject::tr("おだやか"),    QObject::tr("おとなしい"), QObject::tr("なまいき"),   QObject::tr("しんちょう"),
+     QObject::tr("きまぐれ")});
 
 QStringList typesStr = QStringList(
-    {QObject::tr("Fighting"), QObject::tr("Flying"), QObject::tr("Poison"), QObject::tr("Ground"),
-     QObject::tr("Rock"), QObject::tr("Bug"), QObject::tr("Ghost"), QObject::tr("Steel"),
-     QObject::tr("Fire"), QObject::tr("Water"), QObject::tr("Grass"), QObject::tr("Electric"),
-     QObject::tr("Psychic"), QObject::tr("Ice"), QObject::tr("Dragon"), QObject::tr("Dark")});
+    {QObject::tr("かくとう"), QObject::tr("ひこう"), QObject::tr("どく"), QObject::tr("じめん"),
+     QObject::tr("いわ"), QObject::tr("むし"), QObject::tr("ゴースト"), QObject::tr("はがね"),
+     QObject::tr("ほのお"), QObject::tr("みず"), QObject::tr("くさ"), QObject::tr("でんき"),
+     QObject::tr("エスパー"), QObject::tr("こおり"), QObject::tr("ドラゴン"), QObject::tr("あく")});
 
 QStringList shininessStr =
-    QStringList({QObject::tr("Shiny"), QObject::tr("Not shiny"), QObject::tr("Any")});
+    QStringList({QObject::tr("希望する"), QObject::tr("希望しない"), QObject::tr("どちらでもよい")});
 QStringList genderStr =
-    QStringList({QObject::tr("Male"), QObject::tr("Female"), QObject::tr("Any")});
+    QStringList({QObject::tr("オス"), QObject::tr("メス"), QObject::tr("どちらでもよい")});
 }; // namespace GUICommon

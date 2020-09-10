@@ -7,23 +7,23 @@
 
 StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
 {
-  QLabel* lblTitle = new QLabel("Stats reporter");
+  QLabel* lblTitle = new QLabel("プレディクター");
   lblTitle->setAlignment(Qt::AlignCenter);
 
   m_cmbSecondaryPokemon = new QComboBox;
-  QLabel* lblSecondaryPokemon = new QLabel("Secondary Pokémon:");
+  QLabel* lblSecondaryPokemon = new QLabel("味方ポケモン:");
   lblSecondaryPokemon->setAlignment(Qt::AlignRight);
 
   m_cmbGender = new QComboBox();
-  m_cmbGender->addItems({"", "Male", "Female"});
+  m_cmbGender->addItems({"", "オス", "メス"});
   m_cmbGender->setCurrentIndex(0);
 
   QFormLayout* secondaryPokemonLayout = new QFormLayout;
-  secondaryPokemonLayout->addRow("Secondary Pokémon", m_cmbSecondaryPokemon);
-  secondaryPokemonLayout->addRow("Gender", m_cmbGender);
+  secondaryPokemonLayout->addRow("味方ポケモン", m_cmbSecondaryPokemon);
+  secondaryPokemonLayout->addRow("性別", m_cmbGender);
   secondaryPokemonLayout->setLabelAlignment(Qt::AlignRight);
 
-  QLabel* lblStats = new QLabel("Stats (fill these to get the possibilities)");
+  QLabel* lblStats = new QLabel("ステータス");
 
   m_cmbHpStat = new QComboBox();
   m_cmbAtkStat = new QComboBox();
@@ -45,7 +45,7 @@ StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
   m_tblSecondaryPossibilities->setSelectionMode(QAbstractItemView::SingleSelection);
   m_tblSecondaryPossibilities->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_possibilitiesHeaderLabels = QStringList(
-      {"Frame", "Nature", "HP", "Atk", "Def", "SpA", "SpD", "Spe", "H. Power", "Gender"});
+      {"フレーム", "性格", "HP", "攻撃", "防御", "特攻", "特防", "素早さ", "めざパ", "性別"});
   m_tblSecondaryPossibilities->setColumnCount(m_possibilitiesHeaderLabels.size());
   m_tblSecondaryPossibilities->setRowCount(0);
   m_tblSecondaryPossibilities->setHorizontalHeaderLabels(m_possibilitiesHeaderLabels);
@@ -54,18 +54,18 @@ StatsReporterWidget::StatsReporterWidget(QWidget* parent) : QWidget(parent)
   connect(m_tblSecondaryPossibilities, &QTableWidget::itemSelectionChanged, this,
           &StatsReporterWidget::selectedPossibilityChanged);
 
-  m_lblResultsCount = new QLabel("0 result(s)");
+  m_lblResultsCount = new QLabel("0 検索結果");
 
   QFormLayout* leftStatsLayout = new QFormLayout();
-  leftStatsLayout->addRow("HP", m_cmbHpStat);
-  leftStatsLayout->addRow("Attack", m_cmbAtkStat);
-  leftStatsLayout->addRow("Defense", m_cmbDefStat);
+  leftStatsLayout->addRow("HP", m_cmbHpStat); // HP 攻撃 防御 特攻 特防 素早さ
+  leftStatsLayout->addRow("攻撃", m_cmbAtkStat);
+  leftStatsLayout->addRow("防御", m_cmbDefStat);
   leftStatsLayout->setLabelAlignment(Qt::AlignRight);
 
   QFormLayout* RightStatsLayout = new QFormLayout();
-  RightStatsLayout->addRow("Sp. Atk", m_cmbSpAtkStat);
-  RightStatsLayout->addRow("Sp. Def", m_cmbSpDefStat);
-  RightStatsLayout->addRow("Speed", m_cmbSpeedStat);
+  RightStatsLayout->addRow("特攻", m_cmbSpAtkStat);
+  RightStatsLayout->addRow("特防", m_cmbSpDefStat);
+  RightStatsLayout->addRow("素早さ", m_cmbSpeedStat);
   RightStatsLayout->setLabelAlignment(Qt::AlignRight);
 
   QHBoxLayout* statsLayout = new QHBoxLayout;
@@ -224,17 +224,17 @@ void StatsReporterWidget::updateStartersLayout()
 
 QPixmap StatsReporterWidget::pixmapForPokemon(const QString name)
 {
-  if (name == "Umbreon")
+  if (name == "ブラッキー")
     return QPixmap("Resources/MDP197.png");
-  else if (name == "Espeon" || name == "Eevee")
+  else if (name == "エーフィ" || name == "イーブイ")
     return QPixmap("Resources/MDP196.png");
-  else if (name == "Quilava")
+  else if (name == "マグマラシ")
     return QPixmap("Resources/MDP156.png");
-  else if (name == "Croconaw")
+  else if (name == "アリゲイツ")
     return QPixmap("Resources/MDP159.png");
-  else if (name == "Bayleef")
+  else if (name == "ベイリーフ")
     return QPixmap("Resources/MDP153.png");
-  else if (name == "Teddiursa")
+  else if (name == "ヒメグマ")
     return QPixmap("Resources/MDP217.png");
   else
     return QPixmap();
@@ -281,7 +281,7 @@ void StatsReporterWidget::onStatsGenderChanged()
           GUICommon::typesStr[m_filteredCandidates[i].properties.hiddenPowerTypeIndex] +
           QString(" ") + QString::number(m_filteredCandidates[i].properties.hiddenPowerPower));
       QTableWidgetItem* genderItem =
-          new QTableWidgetItem(m_filteredCandidates[i].properties.genderIndex ? "Female" : "Male");
+          new QTableWidgetItem(m_filteredCandidates[i].properties.genderIndex ? "メス" : "オス");
 
       m_tblSecondaryPossibilities->setItem(i, 0, seedItem);
       m_tblSecondaryPossibilities->setItem(i, 1, natureItem);
@@ -298,13 +298,12 @@ void StatsReporterWidget::onStatsGenderChanged()
     m_tblSecondaryPossibilities->resizeColumnsToContents();
     if (m_tblSecondaryPossibilities->rowCount() == 1)
       m_tblSecondaryPossibilities->selectRow(0);
-    m_lblResultsCount->setText(QString::number(m_filteredCandidates.size()) +
-                               QString(" result(s)"));
+    m_lblResultsCount->setText(QString::number(m_filteredCandidates.size()) + QString(" 検索結果"));
   }
   else
   {
     m_lblResultsCount->setText(QString::number(m_filteredCandidates.size()) +
-                               QString(" result(s) (not shown)"));
+                               QString(" 検索結果 (見えない)"));
   }
 }
 
@@ -354,7 +353,7 @@ void StatsReporterWidget::resetStatsSelection()
   m_tblSecondaryPossibilities->clear();
   m_tblSecondaryPossibilities->setRowCount(0);
   m_tblSecondaryPossibilities->setHorizontalHeaderLabels(m_possibilitiesHeaderLabels);
-  m_lblResultsCount->setText("0 result(s)");
+  m_lblResultsCount->setText("0 検索結果");
 }
 
 void StatsReporterWidget::reset()

@@ -17,3 +17,6 @@ Source/.vscode/
 Source/x64/
 Source/x64/
 /.vs
+Source/resource.h
+Source/GC-pokemon-RNG-manipulation-assistant.aps
+Source/GC-pokemon-RNG-manipulation-assistant.rc

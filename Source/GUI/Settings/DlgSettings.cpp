@@ -1,4 +1,4 @@
-#include "DlgSettings.h"
+﻿#include "DlgSettings.h"
 
 #include <QFile>
 #include <QMessageBox>
@@ -13,13 +13,13 @@ DlgSettings::DlgSettings(QWidget* parent) : QDialog(parent)
 {
   m_tabWidget = new QTabWidget(this);
   m_generalTab = new GeneralTab(this);
-  m_tabWidget->addTab(m_generalTab, tr("General"));
+  m_tabWidget->addTab(m_generalTab, tr("一般"));
   m_coloTab = new ColosseumTab(this);
   m_tabWidget->addTab(
-      m_coloTab, "Predictor (" + GUICommon::gamesStr[GUICommon::gameSelection::Colosseum] + ")");
+      m_coloTab, "プレディクター (" + GUICommon::gamesStr[GUICommon::gameSelection::Colosseum] + ")");
   m_xdTab = new GaleDarknessTab(this);
   m_tabWidget->addTab(m_xdTab,
-                      "Predictor (" + GUICommon::gamesStr[GUICommon::gameSelection::XD] + ")");
+                      "プレディクター (" + GUICommon::gamesStr[GUICommon::gameSelection::XD] + ")");
 
   m_buttonsDlg = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
@@ -37,7 +37,7 @@ DlgSettings::DlgSettings(QWidget* parent) : QDialog(parent)
   mainLayout->addWidget(m_buttonsDlg);
   setLayout(mainLayout);
 
-  setWindowTitle(tr("Settings"));
+  setWindowTitle(tr("設定"));
 
   loadSettings();
 }
@@ -62,7 +62,7 @@ void DlgSettings::loadSettings()
   loadUmbreonSettings();
   loadEspeonSettings();
   loadEeveeSettings();
-  m_xdTab->setPalVersionEnabled(SConfig::getInstance().getXDPalVersionEnabled());
+  //m_xdTab->setPalVersionEnabled(SConfig::getInstance().getXDPalVersionEnabled());
 }
 
 void DlgSettings::saveSettings() const
@@ -77,8 +77,8 @@ void DlgSettings::saveSettings() const
   saveUmbreonSettings();
   saveEspeonSettings();
   saveEeveeSettings();
-  SConfig::getInstance().setXDPalVersionEnabled(m_xdTab->getPalVersionEnabled());
-  GaleDarknessRNGSystem::setPalEnabled(m_xdTab->getPalVersionEnabled());
+  //SConfig::getInstance().setXDPalVersionEnabled(m_xdTab->getPalVersionEnabled());
+  //GaleDarknessRNGSystem::setPalEnabled(m_xdTab->getPalVersionEnabled());
 }
 
 void DlgSettings::loadUmbreonSettings()

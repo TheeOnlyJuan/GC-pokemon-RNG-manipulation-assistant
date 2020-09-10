@@ -1,4 +1,4 @@
-#include "PredictorWidget.h"
+﻿#include "PredictorWidget.h"
 
 #include <QHeaderView>
 #include <QTimer>
@@ -18,7 +18,7 @@ PredictorWidget::PredictorWidget(QWidget* parent) : QWidget(parent)
 
 void PredictorWidget::initialiseWidgets()
 {
-  QLabel* lblUninitialised = new QLabel(tr("Select a game"));
+  QLabel* lblUninitialised = new QLabel(tr("ゲームを選ぶ"));
   lblUninitialised->setAlignment(Qt::AlignmentFlag::AlignCenter);
   m_lblStartersNames.append(lblUninitialised);
 
@@ -93,7 +93,7 @@ void PredictorWidget::clearLabels()
 void PredictorWidget::switchGame(const GUICommon::gameSelection game)
 {
   clearLabels();
-  QLabel* lblSeedFinder = new QLabel(tr("Find your seed for predictions or set it manually"));
+  QLabel* lblSeedFinder = new QLabel(tr("Seedを見つける / 手動でSeed値を入力する"));
   lblSeedFinder->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
   m_lblStartersNames.append(lblSeedFinder);
@@ -102,23 +102,23 @@ void PredictorWidget::switchGame(const GUICommon::gameSelection game)
   m_tblStartersPrediction->setRowCount(0);
   m_tblHeaderLabels.clear();
   m_tblHeaderLabels.append(tr("Seed"));
-  m_tblHeaderLabels.append(tr("Trainer ID"));
-  m_tblHeaderLabels.append(tr("Frame (seconds)"));
+  m_tblHeaderLabels.append(tr("IDNo."));
+  m_tblHeaderLabels.append(tr("フレーム (秒)"));
   for (int i = 0; i < SPokemonRNG::getCurrentSystem()->getNbrStartersPrediction(); i++)
   {
-    m_tblHeaderLabels.append(tr("HP IV (stat)"));
-    m_tblHeaderLabels.append(tr("Atk IV"));
-    m_tblHeaderLabels.append(tr("Def IV"));
-    m_tblHeaderLabels.append(tr("Sp. Atk IV"));
-    m_tblHeaderLabels.append(tr("Sp. Def IV"));
-    m_tblHeaderLabels.append(tr("Speed IV"));
-    m_tblHeaderLabels.append(tr("Hidden power"));
-    m_tblHeaderLabels.append(tr("Nature"));
+    m_tblHeaderLabels.append(tr("HP"));
+    m_tblHeaderLabels.append(tr("攻撃"));
+    m_tblHeaderLabels.append(tr("防御"));
+    m_tblHeaderLabels.append(tr("特攻"));
+    m_tblHeaderLabels.append(tr("特防"));
+    m_tblHeaderLabels.append(tr("素早さ"));
+    m_tblHeaderLabels.append(tr("めざめるパワー"));
+    m_tblHeaderLabels.append(tr("性格"));
 
     if (game == GUICommon::gameSelection::XD)
     {
-      m_tblHeaderLabels.append(tr("Gender"));
-      m_tblHeaderLabels.append(tr("Shiny?"));
+      m_tblHeaderLabels.append(tr("性別"));
+      m_tblHeaderLabels.append(tr("色違い?"));
     }
   }
   m_tblStartersPrediction->setColumnCount(m_tblHeaderLabels.count());
@@ -303,7 +303,7 @@ void PredictorWidget::updateGUI(const GUICommon::gameSelection game)
       if (i == 0)
       {
         m_tblStartersPrediction->setItem(
-            i, 2, new QTableWidgetItem(QString::number(frameNumberWithDelay) + " (frame perfect)"));
+            i, 2, new QTableWidgetItem(QString::number(frameNumberWithDelay) + " (フレームパーフェクト)"));
       }
       else
       {
@@ -445,7 +445,7 @@ void PredictorWidget::updateGUI(const GUICommon::gameSelection game)
           passAllFilters = false;
         }
         m_tblStartersPrediction->setItem(i, 12 + j * nbrColPerStarter,
-                                         new QTableWidgetItem(tr(starter.isShiny ? "Yes" : "No")));
+                                         new QTableWidgetItem(tr(starter.isShiny ? "はい" : "いいえ")));
         int shinynessIndex = static_cast<int>(SConfig::getInstance().getEeveeShininess());
         int isShinyInt = starter.isShiny ? static_cast<int>(GUICommon::shininess::Shiny)
                                          : static_cast<int>(GUICommon::shininess::NotShiny);
