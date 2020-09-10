@@ -38,6 +38,9 @@ DlgSettings::DlgSettings(QWidget* parent) : QDialog(parent)
   setLayout(mainLayout);
 
   setWindowTitle(tr("設定"));
+  QFont f;
+  f.setPointSize(9);
+  this->setFont(f);
 
   loadSettings();
 }

@@ -8,6 +8,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QtConcurrent>
+#include <QFont>
 
 #include "../../PokemonRNGSystem/XD/GaleDarknessRNGSystem.h"
 #include "../SPokemonRNG.h"
@@ -91,6 +92,9 @@ SeedFinderPassPage* SeedFinderWizard::getSeedFinderPassPageForGame()
   if (m_seeds.size() > 1)
     strResultStatus = QString::number(m_seeds.size()) + QString(" 検索結果");
   page->setTitle("Seed値特定　試行" + QString::number(numberPass) + "回目 (" + strResultStatus + ")");
+  QFont f;
+  f.setPointSize(12);
+  page->setFont(f);
   adjustSize();
   return page;
 }
@@ -230,33 +234,39 @@ InstructionsPage::InstructionsPage(QWidget* parent, const GUICommon::gameSelecti
   case GUICommon::gameSelection::Colosseum:
     m_lblGameInstructions = new QLabel(tr(
         "\nゲームを開始してメインメニューに入り、「対戦モード」→「とにかくバトル」→「シングルバトル」→「さいきょう」の順に選択します。\n"
-           "ランダムに生成されたチーム編成が表示されるので、表示された\n「プレイヤーの名前」と「先頭のポケモンの名前 をチェック欄に正しく記入します。\n"
+           "ランダムに生成されたチーム編成が表示されるので、\n表示された「プレイヤーの名前」と「先頭のポケモンの名前 をチェック欄に正しく記入します。\n"
 		   "記入が終わったらゲームではとにかくバトルの画面に戻り、次のパスに進みます。\n"
-		   "（ここで間違って戦闘を開始したり、メインメニューに戻ると正しく機能しなくなります。\n）"
-           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n"
+		   "（ここで間違って戦闘を開始したり、メインメニューに戻ると正しく機能しなくなります。）\n"
+           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n\n"
            "説明は以上です。「次へ」をクリックするとseed値特定が開始されます。"));
     break;
   case GUICommon::gameSelection::XD:
     m_lblGameInstructions = new QLabel(tr(
         "\nゲームを開始してメインメニューに入り、「対戦モード」→「シングルバトル」→「さいきょう」の順に選択します。\n"
-           "ランダムに生成されたチーム編成が表示されるので、表示された\n「プレイヤーの名前」と「先頭"
+           "ランダムに生成されたチーム編成が表示されるので、\n表示された「プレイヤーの名前」と「先頭"
            "のポケモンの名前」をチェック欄に正しく記入します。\n"
            "記入が終わったらゲームではとにかくバトルの画面に戻り、次のパスに進みます。\n"
            "（ここで間違って戦闘を開始したり、メインメニューに戻ると正しく機能しなくなります。）\n"
-           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n"
+           "以降、何度か同じ作業を繰り返すとseed値が特定されます。\n\n"
            "説明は以上です。「次へ」をクリックするとseed値特定が開始されます。"));
     break;
   default:
     m_lblGameInstructions = new QLabel("");
     break;
   }
+  QFont f;
+  f.setPointSize(13);
+  lblSummary->setFont(f);
+  lblSummary->setWordWrap(true);
+  m_lblGameInstructions->setFont(f);
   /*
   QLabel* lblNext = new QLabel(
       tr("\nPress \"Next\" once you acknowledged the above instructions to start the seed "
          "finding procedure."));
   lblNext->setWordWrap(true);
+  */
   m_lblGameInstructions->setWordWrap(true);
-*/
+
   QVBoxLayout* instructionsLayout = new QVBoxLayout;
   instructionsLayout->addWidget(lblSummary);
   instructionsLayout->addWidget(m_lblGameInstructions);
@@ -304,6 +314,7 @@ EndPage::EndPage(QWidget* parent, const bool sucess, const GUICommon::gameSelect
           "There will only be a single prediction in the prediction list, this will be your "
           "starter no matter how many frames you spend on the naming screen.";
 */
+
     m_lblResult = new QLabel(
         "Seed値特定が完了しました。\n\n" + QString("現在のseed値は ") +
             QString("%1").arg(seed, 8, 16, QChar('0')).toUpper() +
@@ -315,7 +326,7 @@ EndPage::EndPage(QWidget* parent, const bool sucess, const GUICommon::gameSelect
 				"望ましい予測値は緑、それ以外は赤でハイライトされます。（希望する予測値は設定から入力できます。）\n"
 				"もし表示された予測値で不満な場合は、リロールもしくはオートリロールをクリックします。（リロールの回数だけチーム生成を行って下さい。）\n"
 				"結果に満足な場合は、メインメニューに戻って下さい。\n"
-				"画面右側の欄は、マグマラシ、アリゲイツ、ベイリーフのステータスを入力すると個体値、めざめるパワーを自動で特定できます。\n"
+				"画面右側の欄は、マグマラシ、アリゲイツ、ベイリーフのステータスを入力すると個体値、めざめるパワーを自動で特定できます。\n\n"
 				+ additionalNotes +"「終了」をクリックすると予測値が表示されます。"),
         this);
   }
@@ -333,6 +344,10 @@ EndPage::EndPage(QWidget* parent, const bool sucess, const GUICommon::gameSelect
   setLayout(mainlayout);
   m_lblResult->adjustSize();
   setFixedHeight(m_lblResult->height() + 200);
+
+  QFont f;
+  f.setPointSize(13);
+  this->setFont(f);
 }
 
 int EndPage::nextId() const

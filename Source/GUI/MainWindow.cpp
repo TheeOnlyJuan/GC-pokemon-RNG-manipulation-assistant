@@ -180,6 +180,9 @@ void MainWindow::makeLayouts()
   mainWidget->setLayout(mainLayout);
   setCentralWidget(mainWidget);
 
+  QFont f;
+  f.setPointSize(10);
+  mainWidget->setFont(f);
   setWindowTitle("ポケモン乱数調整ツール");
 }
 
@@ -393,6 +396,10 @@ void MainWindow::autoRerollPredictor()
   QVBoxLayout* mainLayout = new QVBoxLayout;
   mainLayout->addWidget(lblAutoRerolling);
   autoRerollDlg->setLayout(mainLayout);
+  QFont f;
+  f.setPointSize(12);
+  autoRerollDlg->setFont(f);
+
   autoRerollDlg->show();
 
   bool desiredPredictionFound = false;
@@ -422,6 +429,10 @@ void MainWindow::autoRerollPredictor()
                             "最後のチーム編成は、以下のように表示されます:\n" +
                             lastBattleConfirmationStr,
                         QMessageBox::Ok);
+
+	QFont f;
+    f.setPointSize(13);
+    msg->setFont(f);
     msg->exec();
     delete msg;
   }
@@ -433,6 +444,11 @@ void MainWindow::autoRerollPredictor()
             "望ましいseedが見つかりません。"
             "再度自動リロールをお試しください。",
         QMessageBox::Ok);
+
+	QFont f;
+    f.setPointSize(13);
+    msg->setFont(f);
+
     msg->exec();
     delete msg;
   }
@@ -468,6 +484,11 @@ void MainWindow::generatePrecalc()
       QMessageBox::NoButton, this);
   QAbstractButton* pButtonNo = msg->addButton(tr("いいえ"), QMessageBox::NoRole);
   QAbstractButton* pButtonYes = msg->addButton(tr("はい"), QMessageBox::YesRole);
+
+  QFont f;
+  f.setPointSize(12);
+  msg->setFont(f);
+
   msg->exec();
   if (msg->clickedButton() == pButtonYes)
   {
