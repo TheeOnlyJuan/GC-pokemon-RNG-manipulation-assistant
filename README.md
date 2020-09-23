@@ -1,5 +1,5 @@
 # GC-pokemon-RNG-manipulation-assistant
-![Screenshot](https://raw.githubusercontent.com/TheeOnlyJuan/GC-pokemon-RNG-manipulation-assistant/master/Docs/screenshot.png)
+![Screenshot](https://github.com/TheeOnlyJuan/GC-pokemon-RNG-manipulation-assistant/blob/JapaneseVersion-%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88/Docs/screenshot.png?raw=true)
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/3k6v4h3rxl4pjd57/branch/master?svg=true)](https://ci.appveyor.com/project/aldelaro5/gc-pokemon-rng-manipulation-assistant/branch/master)
 
