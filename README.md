@@ -1,14 +1,13 @@
 # GC-pokemon-RNG-manipulation-assistant
-![Screenshot](https://raw.githubusercontent.com/aldelaro5/GC-pokemon-RNG-manipulation-assistant/master/Docs/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/TheeOnlyJuan/GC-pokemon-RNG-manipulation-assistant/master/Docs/screenshot.png)
 
-[![Travis CI build Status](https://travis-ci.org/aldelaro5/GC-pokemon-RNG-manipulation-assistant.svg?branch=master)](https://travis-ci.org/aldelaro5/GC-pokemon-RNG-manipulation-assistant)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/3k6v4h3rxl4pjd57/branch/master?svg=true)](https://ci.appveyor.com/project/aldelaro5/gc-pokemon-rng-manipulation-assistant/branch/master)
 
 A program to aid RTA speedrunners to manipulate the starters in Pokemon Colosseum and Pokemon XD: Gale of Darkness. This manipulation involves using the random battle feature of each game to find the current seed and hitting the right frame when confirming the trainer name to get the desired starters RNG. 
 
 This program allows this manipulation technique to work as it assists the runner into all these steps with user-friendliness being a priority. The goal of having such a method is to reduce the amount of early resets required to start a run and to also open up new possibilities for having better than usual starters as this method makes it easier to see the different possibilities.
 
-For binary releases of this program, refer to [the "releases" page](https://github.com/aldelaro5/GC-pokemon-RNG-manipulation-assistant/releases) on [the Github repository](https://github.com/aldelaro5/GC-pokemon-RNG-manipulation-assistant).
+For binary releases of this program, refer to [the "releases" page](https://github.com/TheeOnlyJuan/GC-pokemon-RNG-manipulation-assistant/releases) on [the Github repository](https://github.com/TheeOnlyJuan/GC-pokemon-RNG-manipulation-assistant).
 
 ## System requirements
 Any x86_64 based system should work. For Windows, you must have the [Microsoft Visual C++ Redistributable for Visual Studio 2017](https://support.microsoft.com/en-ca/help/2977003/the-latest-supported-visual-c-downloads) installed.
